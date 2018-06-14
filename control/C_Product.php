@@ -1,19 +1,28 @@
 <?php
-    require '../model/M_Database.php';
+    // controler for the shop page
 
-    class Product {
+    require '../model/M_Product.php';
 
-        public function __construct() {
-
+    $type = "";
+    if(isset($_GET['category'])) {
+        $category = $_GET['category'];
+                
+        if ($category === "ao") {
+            $type = "áo";
         }
-
-        public function SelectProductByTag($tag) {
-            $db = new Database();
-            $tag = "\'".$tag."\'";
-            $sql = "SELECT * FROM product";//,product_tag WHERE product.ID = product_tag.IDSANPHAM AND product_tag.IDSANPHAM = ".$tag; //INNER JOIN product_tag ON product.ID = product_tag.IDSANPHAM"; //
-
-            $result = $db->SelectData($sql);
-            return $result;
+        else if ($category === "quan") {
+            $type = "quần";
+        }
+        else if ($category === "giay"){
+            $type = "giày";
+        }
+        else {
+            $type = $_GET['category'];
         }
     }
+
+    $prd = new Product();
+    $result = $prd->SelectProductByTag($type);
+
+    include '../view/shop.php';
 ?>

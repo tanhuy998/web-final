@@ -1,12 +1,8 @@
-<?php
-    //header('Content-type: text/plain; charset=utf-8');
-?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script type="text/javascript" src="js/lib.js"></script>
     <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>eElectronics - HTML eCommerce Template</title>
@@ -26,7 +22,6 @@
     <link rel="stylesheet" href="http://localhost/final/css/owl.carousel.css">
     <link rel="stylesheet" href="http://localhost/final/css/style.css">
     <link rel="stylesheet" href="http://localhost/final/css/responsive.css">
-    <script type="text/javascript" src="../js/lib.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -111,8 +106,8 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="index.html">Home</a></li>
-                        <li class="active"><a href="shop.html">Shop page</a></li>
-                        <li><a href="single-product.html">Single product</a></li>
+                        <li><a href="shop.html">Shop page</a></li>
+                        <li class="active"><a href="single-product.html">Single product</a></li>
                         <li><a href="cart.html">Cart</a></li>
                         <li><a href="checkout.html">Checkout</a></li>
                         <!-- <li><a href="#">Category</a></li> -->
@@ -141,65 +136,161 @@
         <div class="zigzag-bottom"></div>
         <div class="container">
             <div class="row">
-
-                <?php
-                    //require '../control/C_Product.php';
-                    
-
-                    
-
-                    //$db = new Database();
-                    //$sql = "SELECT * FROM product JOIN product_tag IN product.ID = product_tag.IDSANPHAM WHERE product_tag.TENTAG = \"".$type."\"";
-                    
-                    
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                            
-                            $image = $prd->SelectProductImageByProductID($row['ID']);
-                            $thumb = $image->fetch_assoc();
-                            
-                            echo "<div class=\"col-md-3 col-sm-6\">";
-                            echo "<div class=\"single-shop-product\">";
-                            echo    "<div class=\"product-upper\">";
-                            echo        "<a href=\"http://localhost/final/control/C_Single-product.php?id=".$row['ID']."&category=".$type."\"><img src=\"".$thumb['DUONGDAN']."\" alt=\"img\"></a>";
-                            echo   "</div>";
-                            echo    "<h2><a href=\"http://localhost/final/control/C_Single-product.php?id=".$row['ID']."&category=".$type."\">".$row['TENSANPHAM']."</a></h2>";
-                            echo    "<div class=\"product-carousel-price\">";
-                            echo        "<ins>".$row['GIA']."</ins>";
-                            echo     "</div>";
-                                
-                            echo    "<div class=\"product-option-shop\">";
-                            echo        "<a class=\"add_to_cart_button\" data-quantity=\"1\" data-product_sku=\"\" data-product_id=\"70\" rel=\"nofollow\" href=\"#\" onclick=\"AddCartProductCookie(".$row['ID'].",'1')\">Thêm vào giỏ</a>";
-                            echo    "</div></div> </div>";
-                        }
-                    }
-                    else echo "ERROR";
-                ?>
-            </div>
-            
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="product-pagination text-center">
-                        <nav>
-                          <ul class="pagination">
-                            <li>
-                              <a href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                              </a>
-                            </li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li>
-                              <a href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                              </a>
-                            </li>
-                          </ul>
-                        </nav>                        
+                <div class="col-md-4">
+                    <div class="single-sidebar">
+                        <h2 class="sidebar-title">Search Products</h2>
+                        <form action="">
+                            <input type="text" placeholder="Search products...">
+                            <input type="submit" value="Search">
+                        </form>
                     </div>
+                    
+                    <div class="single-sidebar">
+                        <h2 class="sidebar-title">Sản phẩm liên quan</h2>
+                        <div class="thubmnail-recent">
+                            <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
+                            <h2><a href="">Sony Smart TV - 2015</a></h2>
+                            <div class="product-sidebar-price">
+                                <ins>$700.00</ins> <del>$800.00</del>
+                            </div>                             
+                        </div>
+                        <div class="thubmnail-recent">
+                            <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
+                            <h2><a href="">Sony Smart TV - 2015</a></h2>
+                            <div class="product-sidebar-price">
+                                <ins>$700.00</ins> <del>$800.00</del>
+                            </div>                             
+                        </div>
+                        <div class="thubmnail-recent">
+                            <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
+                            <h2><a href="">Sony Smart TV - 2015</a></h2>
+                            <div class="product-sidebar-price">
+                                <ins>$700.00</ins> <del>$800.00</del>
+                            </div>                             
+                        </div>
+                        <div class="thubmnail-recent">
+                            <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
+                            <h2><a href="">Sony Smart TV - 2015</a></h2>
+                            <div class="product-sidebar-price">
+                                <ins>$700.00</ins> <del>$800.00</del>
+                            </div>                             
+                        </div>
+                    </div>
+                    
+                    <div class="single-sidebar">
+                        <h2 class="sidebar-title">Recent Posts</h2>
+                        <ul>
+                            <li><a href="">Sony Smart TV - 2015</a></li>
+                            <li><a href="">Sony Smart TV - 2015</a></li>
+                            <li><a href="">Sony Smart TV - 2015</a></li>
+                            <li><a href="">Sony Smart TV - 2015</a></li>
+                            <li><a href="">Sony Smart TV - 2015</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-md-8">
+                    <div class="product-content-right">
+                        <div class="product-breadcroumb">
+                            <a href="http://localhost/final/view/index.html">Trang chủ</a>
+                            <a href="http://localhost/final/control/C_Product.php?category=<?php echo $category;?>"> <?php echo $category;?></a>
+                            <a href="#"> <?php echo $product['TENSANPHAM']; ?> </a>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="product-images">
+                                    <div class="product-main-img">
+                                        <img src="<?php echo $thumb_image['DUONGDAN'];?>" alt="thumbnail">
+                                    </div>
+                                    
+                                    <div class="product-gallery">
+                                        <?php
+                                            if ($product_image_resource->num_rows >0) {
+                                                while ($row = $product_image_resource->fetch_assoc()) {
+                                                    echo "<img src=\"".$row['DUONGDAN']."\" alt=\"image\">";
+                                                }
+                                            }
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-sm-6">
+                                <div class="product-inner">
+                                    <h2 class="product-name"><?php echo $product['TENSANPHAM'];?></h2>
+                                    <div class="product-inner-price">
+                                        <ins><?php echo $product['GIA']?> VNĐ</ins>
+                                    </div>    
+                                    
+                                    <form action="" class="cart">
+                                        <div class="quantity">
+                                            <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
+                                        </div>
+                                        <button class="add_to_cart_button" type="submit" onclick="AddCartProductCookie('SonySmartTV',700,1,'M')">Add to cart</button>
+                                    </form>   
+                                    
+                                    <div class="product-inner-category">
+                                        <p>
+                                            <?php
+                                                echo "Tags: ";
+                                                $tagCount = 0;
+
+                                                if ($product_tag_resource->num_rows > 0) {
+                                                    while ($row = $product_tag_resource->fetch_assoc()) {
+                                                        $tagCount += 1;
+                                                        $char = ($tagCount === $product_tag_resource->num_rows )? "":", ";
+                                                        
+                                                        echo "<a href=\"http://localhost/final/control/C_product.php?category=".$row['TENTAG']."\">".$row['TENTAG'].$char."</a>";
+                                                    }
+                                                }
+                                            ?>
+                                            
+                                        </p>
+                                    </div> 
+                                    
+                                    <div role="tabpanel">
+                                        <ul class="product-tab" role="tablist">
+                                            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Description</a></li>
+                                            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Reviews</a></li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div role="tabpanel" class="tab-pane fade in active" id="home">
+                                                <h2>Product Description</h2>  
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tristique, diam in consequat iaculis, est purus iaculis mauris, imperdiet facilisis ante ligula at nulla. Quisque volutpat nulla risus, id maximus ex aliquet ut. Suspendisse potenti. Nulla varius lectus id turpis dignissim porta. Quisque magna arcu, blandit quis felis vehicula, feugiat gravida diam. Nullam nec turpis ligula. Aliquam quis blandit elit, ac sodales nisl. Aliquam eget dolor eget elit malesuada aliquet. In varius lorem lorem, semper bibendum lectus lobortis ac.</p>
+
+                                                <p>Mauris placerat vitae lorem gravida viverra. Mauris in fringilla ex. Nulla facilisi. Etiam scelerisque tincidunt quam facilisis lobortis. In malesuada pulvinar neque a consectetur. Nunc aliquam gravida purus, non malesuada sem accumsan in. Morbi vel sodales libero.</p>
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane fade" id="profile">
+                                                <h2>Reviews</h2>
+                                                <div class="submit-review">
+                                                    <p><label for="name">Name</label> <input name="name" type="text"></p>
+                                                    <p><label for="email">Email</label> <input name="email" type="email"></p>
+                                                    <div class="rating-chooser">
+                                                        <p>Your rating</p>
+
+                                                        <div class="rating-wrap-post">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                        </div>
+                                                    </div>
+                                                    <p><label for="review">Your review</label> <textarea name="review" id="" cols="30" rows="10"></textarea></p>
+                                                    <p><input type="submit" value="Submit"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                    </div>                    
                 </div>
             </div>
         </div>
