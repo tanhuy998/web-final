@@ -2,6 +2,9 @@
     // controler for the shop page
 
     require '../model/M_Product.php';
+    require '../libs/Cart-process.php';
+
+    CartProcess();
 
     $type = "";
     if(isset($_GET['category'])) {

@@ -1,10 +1,4 @@
 <?php
-    require '../control/C_TagsSplit.php';
-    require '../model/M_Server_Connect.php';
-
-    $conn = new M_Connection('root','');
-    $conn->OpenConnection();
-    $conn->CloseConnection();
 
     
 ?>
@@ -29,9 +23,10 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/owl.carousel.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="http://localhost/final/css/owl.carousel.css">
+    <link rel="stylesheet" href="http://localhost/final/css/style.css">
+    <link rel="stylesheet" href="http://localhost/final/css/responsive.css">
+    <link rel="stylesheet" href="http://localhost/final/css/dropstyle.css">
     
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

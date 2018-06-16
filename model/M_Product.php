@@ -42,5 +42,14 @@
             $result = $db->SelectData($sql);
             return $result; 
         }
+
+        public function SelectProductThumbnailImageByProductID($productID) {
+            $db = new Database();
+
+            $sql = "SELECT * FROM Product_image WHERE product_image.IDSANPHAM = '$productID' LIMIT 1";
+
+            $result = $db->SelectData($sql);
+            return $result;
+        }
     }
 ?>`

@@ -44,21 +44,20 @@ function GetCookieValue(cname) {
 function AddCartProductCookie(pID, pQuantity) {
     var cartList = GetCookieValue("cart");
     var pValue = pID + '-' + pQuantity;
-
     var index = cartList.indexOf(pID);
-    var old_pValue = "";
+    
     if (index != -1) { //if the product i already in cart
-
+        var old_pValue = "";
         for (var i =index; i < cartList.length;++i) {
             if (cartList.charAt(i) != ',') {
-                oldpValue += cartList.charAt(i);
+                old_pValue += cartList.charAt(i);
             }
             else {
                 break;
             }
         }
 
-        cartList.replace(old_pValue,pValue);
+        cartList = cartList.replace(old_pValue,pValue);
     }
     else {
         if (cartList === "") {
@@ -231,9 +230,8 @@ function SetCheckoutTag(className,totalPrice,quantity) {
 
 
 
-function GetCartQuantity(className) {
+function GetProductQuantity(id) {
     //var id = "#" + className;
-    var id = "#" + GetHashCode(className).toString();
     var val = document.getElementById(id).value;
     return val;
 }

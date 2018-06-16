@@ -22,7 +22,8 @@
     <link rel="stylesheet" href="http://localhost/final/css/owl.carousel.css">
     <link rel="stylesheet" href="http://localhost/final/css/style.css">
     <link rel="stylesheet" href="http://localhost/final/css/responsive.css">
-    <script type="text/javascript" src="../js/lib.js"></script>
+    <link rel="stylesheet" href="http://localhost/final/css/dropstyle.css">
+    <Script type="text/javascript" scr="../js/lib.js"> </script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -31,7 +32,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
+  <body onload="PrintProductsToCartTable()">
    
     <div class="header-area">
         <div class="container">
@@ -108,8 +109,8 @@
                     <ul class="nav navbar-nav">
                         <li><a href="index.html">Home</a></li>
                         <li><a href="shop.html">Shop page</a></li>
-                        <li class="active"><a href="single-product.html">Single product</a></li>
-                        <li><a href="cart.html">Cart</a></li>
+                        <li><a href="single-product.html">Single product</a></li>
+                        <li class="active"><a href="#">Cart</a></li>
                         <li><a href="checkout.html">Checkout</a></li>
                         <!-- <li><a href="#">Category</a></li> -->
                         <!-- <li><a href="#">Others</a></li> -->
@@ -125,12 +126,12 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="product-bit-title text-center">
-                        <h2>Shop</h2>
+                        <h2>Shopping Cart</h2>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div> <!-- End Page title area -->
     
     
     <div class="single-product-area">
@@ -140,38 +141,38 @@
                 <div class="col-md-4">
                     <div class="single-sidebar">
                         <h2 class="sidebar-title">Search Products</h2>
-                        <form action="">
+                        <form action="#">
                             <input type="text" placeholder="Search products...">
                             <input type="submit" value="Search">
                         </form>
                     </div>
                     
                     <div class="single-sidebar">
-                        <h2 class="sidebar-title">Sản phẩm liên quan</h2>
+                        <h2 class="sidebar-title">Products</h2>
                         <div class="thubmnail-recent">
                             <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
-                            <h2><a href="">Sony Smart TV - 2015</a></h2>
+                            <h2><a href="single-product.html">Sony Smart TV - 2015</a></h2>
                             <div class="product-sidebar-price">
                                 <ins>$700.00</ins> <del>$800.00</del>
                             </div>                             
                         </div>
                         <div class="thubmnail-recent">
                             <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
-                            <h2><a href="">Sony Smart TV - 2015</a></h2>
+                            <h2><a href="single-product.html">Sony Smart TV - 2015</a></h2>
                             <div class="product-sidebar-price">
                                 <ins>$700.00</ins> <del>$800.00</del>
                             </div>                             
                         </div>
                         <div class="thubmnail-recent">
                             <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
-                            <h2><a href="">Sony Smart TV - 2015</a></h2>
+                            <h2><a href="single-product.html">Sony Smart TV - 2015</a></h2>
                             <div class="product-sidebar-price">
                                 <ins>$700.00</ins> <del>$800.00</del>
                             </div>                             
                         </div>
                         <div class="thubmnail-recent">
                             <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
-                            <h2><a href="">Sony Smart TV - 2015</a></h2>
+                            <h2><a href="single-product.html">Sony Smart TV - 2015</a></h2>
                             <div class="product-sidebar-price">
                                 <ins>$700.00</ins> <del>$800.00</del>
                             </div>                             
@@ -181,124 +182,150 @@
                     <div class="single-sidebar">
                         <h2 class="sidebar-title">Recent Posts</h2>
                         <ul>
-                            <li><a href="">Sony Smart TV - 2015</a></li>
-                            <li><a href="">Sony Smart TV - 2015</a></li>
-                            <li><a href="">Sony Smart TV - 2015</a></li>
-                            <li><a href="">Sony Smart TV - 2015</a></li>
-                            <li><a href="">Sony Smart TV - 2015</a></li>
+                            <li><a href="#">Sony Smart TV - 2015</a></li>
+                            <li><a href="#">Sony Smart TV - 2015</a></li>
+                            <li><a href="#">Sony Smart TV - 2015</a></li>
+                            <li><a href="#">Sony Smart TV - 2015</a></li>
+                            <li><a href="#">Sony Smart TV - 2015</a></li>
                         </ul>
                     </div>
                 </div>
                 
                 <div class="col-md-8">
                     <div class="product-content-right">
-                        <div class="product-breadcroumb">
-                            <a href="http://localhost/final/view/index.html">Trang chủ</a>
-                            <a href="http://localhost/final/control/C_Product.php?category=<?php echo $category;?>"> <?php echo $category;?></a>
-                            <a href="#"> <?php echo $product['TENSANPHAM']; ?> </a>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="product-images">
-                                    <div class="product-main-img">
-                                        <img src="<?php echo $thumb_image['DUONGDAN'];?>" alt="thumbnail">
-                                    </div>
-                                    
-                                    <div class="product-gallery">
+                        <div class="woocommerce">
+                            <!--<form method="post" action="#">-->
+                                <table cellspacing="0" class="shop_table cart">
+                                    <thead>
+                                        <tr>
+                                            <th class="product-remove">&nbsp;</th>
+                                            <th class="product-thumbnail">&nbsp;</th>
+                                            <th class="product-name">Sản phẩm</th>
+                                            <th class="product-price">Giá</th>
+                                            <th class="product-quantity">Số lượng</th>
+                                            <th class="product-subtotal">Tổng cộng</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id = "cart-list" onload="PrintProductToCartTable()">
+                                        <!-- cart list -->
                                         <?php
-                                            if ($product_image_resource->num_rows >0) {
-                                                while ($row = $product_image_resource->fetch_assoc()) {
-                                                    echo "<img src=\"".$row['DUONGDAN']."\" alt=\"image\">";
-                                                }
+                                            foreach($productCartList as $product) {
+                                                $id = $product['ID'];
+                                                $totalPrice = $product['GIA'] * intval($quantity["$id"]);
+                                                $cartSubtotal += $totalPrice;
+                                                echo "<tr class=\"cart_item\"><td class=\"product-remove\" onclick=\"\"> <a title=\"Remove this item\" class=\"remove\" href=\"#\">×</a> </td>";
+                                                echo "<td class=\"product-thumbnail\"><a href=\"http://localhost/final/control/C_Single-Product.php?id=$id\"><img width=\"145\" height=\"145\" alt=\"poster_1_up\" class=\"shop_thumbnail\" src=\"".$productThumbImage["$id"]['DUONGDAN']."\"></a></td>";
+                                                echo "<td class=\"product-name\"><a href=\"http://localhost/final/controle/C_Single-Product.php?id=$id\">".$product['TENSANPHAM']."</a></td>";
+                                                echo "<td class=\"product-price\"><span class=\"amount\">".$product['GIA']." VNĐ</span></td>";
+                                                echo "<td class=\"product-quantity\"><div class=\"quantity buttons_added\"><input type=\"number\" size=\"4\" class=\"input-text qty text\" title=\"Qty\" value=\"".$quantity["$id"]."\" min=\"1\" step=\"1\"></div></td>";
+                                                echo "<td class=\"product-subtotal\"><span class=\"amount\">$totalPrice VNĐ</span></td></tr>";
+
                                             }
-                                        ?>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="col-sm-6">
-                                <div class="product-inner">
-                                    <h2 class="product-name"><?php echo $product['TENSANPHAM'];?></h2>
-                                    <div class="product-inner-price">
-                                        <ins><?php echo $product['GIA']?> VNĐ</ins>
-                                    </div>    
-                                    
-                                    <form action="" class="cart">
-                                        <div class="quantity">
-                                            <input type="number" id="#quantity" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
-                                        </div>
-                                        <button class="add_to_cart_button" type="button" onclick="AddCartProductCookie('<?php echo $product['ID'];?>',GetProductQuantity('#quantity'))">Thêm vào giỏ</button>
-                                    </form>   
-                                    
-                                    <div class="product-inner-category">
-                                        <p>
-                                            <?php
-                                                echo "Tags: ";
-                                                $tagCount = 0;
-
-                                                if ($product_tag_resource->num_rows > 0) {
-                                                    while ($row = $product_tag_resource->fetch_assoc()) {
-                                                        $tagCount += 1;
-                                                        $char = ($tagCount === $product_tag_resource->num_rows )? "":", ";
-                                                        
-                                                        echo "<a href=\"http://localhost/final/control/C_product.php?category=".$row['TENTAG']."\">".$row['TENTAG'].$char."</a>";
-                                                    }
-                                                }
-                                            ?>
                                             
-                                        </p>
-                                    </div> 
-                                    
-                                    <div role="tabpanel">
-                                        <ul class="product-tab" role="tablist">
-                                            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Description</a></li>
-                                            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Reviews</a></li>
-                                        </ul>
-                                        <div class="tab-content">
-                                            <div role="tabpanel" class="tab-pane fade in active" id="home">
-                                                <h2>Mô tả sản phẩm</h2>  
-                                                <p>
-                                                    <?php
-                                                        function EndlineForParagraphTag($paragraph) {
-                                                            $res = str_replace("\n","<br>",$paragraph);
-                                                            return $res;
-                                                        }
-                                                        $description = EndlineForParagraphTag($product['MOTA']);
-                                                        echo $description;
-                                                    ?>
-                                                </p>
-
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane fade" id="profile">
-                                                <h2>Reviews</h2>
-                                                <div class="submit-review">
-                                                    <p><label for="name">Name</label> <input name="name" type="text"></p>
-                                                    <p><label for="email">Email</label> <input name="email" type="email"></p>
-                                                    <div class="rating-chooser">
-                                                        <p>Your rating</p>
-
-                                                        <div class="rating-wrap-post">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                        </div>
-                                                    </div>
-                                                    <p><label for="review">Your review</label> <textarea name="review" id="" cols="30" rows="10"></textarea></p>
-                                                    <p><input type="submit" value="Submit"></p>
+                                        ?>
+                
+                                        <tr>
+                                            <td class="actions" colspan="6">
+                                                <div class="coupon">
+                                                    <form action="#" method="get">
+                                                        <label for="coupon_code">Giảm giá</label>
+                                                        <input type="text" placeholder="Coupon code" value="" id="Mã giảm giá" class="input-text" name="coupon_code">
+                                                        <input type="submit" value="Áp dụng" name="apply_coupon" class="button">
+                                                    </form>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
+
+                                                <form action="#" method="get">
+                                                    <input type="submit" value="Cập nhật giỏ" name="update_cart" class="button">
+                                                </form>
+                                                
+                                                <form action="http://localhost/final/control/C_Checkout.php" method="get">
+                                                    <input type="submit" value="Thanh toán" name="proceed" class="checkout-button button alt wc-forward" >
+                                                </form>
+                                        
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            <!--</form>-->
+
+                            <div class="cart-collaterals">
+
+
+                            <div class="cross-sells">
+                                <h2></h2>
+                                <ul class="products">
+                                    <li class="product">
+                                        <a href="single-product.html">
+                                            <img width="325" height="325" alt="T_4_front" class="attachment-shop_catalog wp-post-image" src="img/product-2.jpg">
+                                            <h3>Ship Your Idea</h3>
+                                            <span class="price"><span class="amount">£20.00</span></span>
+                                        </a>
+
+                                        <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="22" rel="nofollow" href="single-product.html">Select options</a>
+                                    </li>
+
+                                    <li class="product">
+                                        <a href="single-product.html">
+                                            <img width="325" height="325" alt="T_4_front" class="attachment-shop_catalog wp-post-image" src="img/product-4.jpg">
+                                            <h3>Ship Your Idea</h3>
+                                            <span class="price"><span class="amount">£20.00</span></span>
+                                        </a>
+
+                                        <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="22" rel="nofollow" href="single-product.html">Select options</a>
+                                    </li>
+                                </ul>
                             </div>
-                        </div>
-                        
-                        
-                        
+
+
+                            <div class="cart_totals ">
+                                <h2>Chi phí giỏ hàng</h2>
+
+                                <table cellspacing="0">
+                                    <tbody>
+                                        <tr class="cart-subtotal">
+                                            <th>Tạm tính</th>
+                                            <td><span class="amount"><?php echo $cartSubtotal;?></span></td>
+                                        </tr>
+
+                                        <tr class="shipping">
+                                            <th>Phí giao hàng</th>
+                                            <td>Miễn phí</td>
+                                        </tr>
+
+                                        <tr class="order-total">
+                                            <th>Tổng cộng</th>
+                                            <td><strong><span class="amount"><?php echo $cartSubtotal;?></span></strong> </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                            <form method="post" action="#" class="shipping_calculator">
+                                <h2><a class="shipping-calculator-button" data-toggle="collapse" href="#calcalute-shipping-wrap" aria-expanded="false" aria-controls="calcalute-shipping-wrap">Calculate Shipping</a></h2>
+
+                                <section id="calcalute-shipping-wrap" class="shipping-calculator-form collapse">
+
+                                <p class="form-row form-row-wide">
+                                <select rel="calc_shipping_state" class="country_to_state" id="calc_shipping_country" name="calc_shipping_country">
+                                    <option value="">Select a country…</option>
+                                    
+                                </select>
+                                </p>
+
+                                <p class="form-row form-row-wide"><input type="text" id="calc_shipping_state" name="calc_shipping_state" placeholder="State / county" value="" class="input-text"> </p>
+
+                                <p class="form-row form-row-wide"><input type="text" id="calc_shipping_postcode" name="calc_shipping_postcode" placeholder="Postcode / Zip" value="" class="input-text"></p>
+
+
+                                <p><button class="button" value="1" name="calc_shipping" type="submit">Update Totals</button></p>
+
+                                </section>
+                            </form>
+
+
+                            </div>
+                        </div>                        
                     </div>                    
                 </div>
             </div>
@@ -328,11 +355,11 @@
                     <div class="footer-menu">
                         <h2 class="footer-wid-title">User Navigation </h2>
                         <ul>
-                            <li><a href="">My account</a></li>
-                            <li><a href="">Order history</a></li>
-                            <li><a href="">Wishlist</a></li>
-                            <li><a href="">Vendor contact</a></li>
-                            <li><a href="">Front page</a></li>
+                            <li><a href="#">My account</a></li>
+                            <li><a href="#">Order history</a></li>
+                            <li><a href="#">Wishlist</a></li>
+                            <li><a href="#">Vendor contact</a></li>
+                            <li><a href="#">Front page</a></li>
                         </ul>                        
                     </div>
                 </div>
@@ -341,11 +368,11 @@
                     <div class="footer-menu">
                         <h2 class="footer-wid-title">Categories</h2>
                         <ul>
-                            <li><a href="">Mobile Phone</a></li>
-                            <li><a href="">Home accesseries</a></li>
-                            <li><a href="">LED TV</a></li>
-                            <li><a href="">Computer</a></li>
-                            <li><a href="">Gadets</a></li>
+                            <li><a href="#">Mobile Phone</a></li>
+                            <li><a href="#">Home accesseries</a></li>
+                            <li><a href="#">LED TV</a></li>
+                            <li><a href="#">Computer</a></li>
+                            <li><a href="#">Gadets</a></li>
                         </ul>                        
                     </div>
                 </div>
@@ -355,14 +382,17 @@
                         <h2 class="footer-wid-title">Newsletter</h2>
                         <p>Sign up to our newsletter and get exclusive deals you wont find anywhere else straight to your inbox!</p>
                         <div class="newsletter-form">
-                            <input type="email" placeholder="Type your email">
-                            <input type="submit" value="Subscribe">
+                            <form action="#">
+                                <input type="email" placeholder="Type your email">
+                                <input type="submit" value="Subscribe">
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div> <!-- End footer top area -->
+    
     <div class="footer-bottom-area">
         <div class="container">
             <div class="row">
@@ -382,7 +412,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> <!-- End footer bottom area -->
    
     <!-- Latest jQuery form server -->
     <script src="https://code.jquery.com/jquery.min.js"></script>

@@ -1,7 +1,10 @@
 <?php
     // controller for the single product page
 
-    require '../model/M_Product.php';
+    require_once '../model/M_Product.php';
+    require_once '../libs/Cart-process.php';
+
+    CartProcess();
 
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
