@@ -7,7 +7,7 @@
     */
     class ProductProperty {
         // static arr primary_tag use to hold the primary property of product for whole class to refer
-        private static $primary_tag = array('quần'=>true, 'áo'=>true, 'giày'=>true);
+        private static $primary_tag = array('quần'=>4, 'áo'=>4, 'giày'=>4);
         /*
             numeric array use for store all products tag's name
             associative array use for store tag's name as a key to check if the tag exists in this product
@@ -29,20 +29,22 @@
                 while ($row = $tag_resource->fetch_assoc()) {
                     $tagName = $row['TENTAG'];
 
-                    if (isset(self::$primary_tag["tagName"])) {
+                    // if $tagName key is set on primary_tag array 
+                    // => $tagname is primary property of current product 
+                    if (isset(self::$primary_tag[$tagName])) {
                         $this->primaryTag = $tagName;
                     }
 
                     $this->properties_array[] = $tagName;
                     // set true just because boolean is the cheapest type :v
-                    $this->properties_assoc['tag'] = true;
+                    $this->properties_assoc[$tagName] = true;
                 }
             }
         }
 
         // get primary tag method
         public function PrimaryProperty() {
-            return $this->primaryTag();
+            return $this->primaryTag;
         }
 
         public function ID() {
@@ -66,24 +68,33 @@
                 while ($row = $tag_resource->fetch_assoc()) {
                     $tagName = $row['TENTAG'];
 
+                    // if $tagName key is set on primary_tag array 
+                    // => $tagname is primary property of current product 
+                    if (isset(self::$primary_tag[$tagName])) {
+                        $this->primaryTag = $tagName;
+                    }
+
                     $this->properties_array[] = $tagName;
                     // set true just because boolean is the cheapest type :v
-                    $this->properties_assoc['tag'] = true;
+                    $this->properties_assoc[$tagName] = true;
                 }
             }
         }
 
         // check for existence of product's single property
         // return true if product has the specified property and false for the rest
-        public function ExistProperty($_property) {
+        public function ExistProperty(string $_property) {
             return (isset($this->properties_assoc["$_property"]));
         }
 
         // get all properties of product method
         // return a list of property as an numeric array
         public function Properties() {
-            return $this->property_array;
+            return $this->properties_array;
         }
 
+        public function Count() {
+            return count($this->properties_array);
+        }
     }
 ?>

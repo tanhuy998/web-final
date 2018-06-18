@@ -7,6 +7,15 @@
 
         }
 
+        public function SelectAllProduct() {
+            $db = new Database();
+
+            $sql = 'SELECT * FROM product'; //INNER JOIN product_tag ON product.ID = product_tag.IDSANPHAM"; //
+
+            $result = $db->SelectData($sql);
+            return $result;
+        }
+
         public function SelectProductByTag($tag) {
             $db = new Database();
             //$tag = "\'".$tag."\'";
