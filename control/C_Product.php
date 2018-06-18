@@ -26,6 +26,11 @@
 
     $prd = new Product();
     $result = $prd->SelectProductByTag($type);
+    
+    $temp1 = intval($result->num_rows / 8);
+    $temp2 = ($result->num_rows % 8) == 0? 0 : 1;
+    $currentPage = $_GET['page'];
+    $maxPage = $temp1 + $temp2;
 
     include '../view/shop.php';
 ?>

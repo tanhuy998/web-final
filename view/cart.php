@@ -32,7 +32,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body onload="PrintProductsToCartTable()">
+  <body onload="">
    
     <div class="header-area">
         <div class="container">
@@ -299,30 +299,6 @@
                                     </tbody>
                                 </table>
                             </div>
-
-
-                            <form method="post" action="#" class="shipping_calculator">
-                                <h2><a class="shipping-calculator-button" data-toggle="collapse" href="#calcalute-shipping-wrap" aria-expanded="false" aria-controls="calcalute-shipping-wrap">Calculate Shipping</a></h2>
-
-                                <section id="calcalute-shipping-wrap" class="shipping-calculator-form collapse">
-
-                                <p class="form-row form-row-wide">
-                                <select rel="calc_shipping_state" class="country_to_state" id="calc_shipping_country" name="calc_shipping_country">
-                                    <option value="">Select a country…</option>
-                                    
-                                </select>
-                                </p>
-
-                                <p class="form-row form-row-wide"><input type="text" id="calc_shipping_state" name="calc_shipping_state" placeholder="State / county" value="" class="input-text"> </p>
-
-                                <p class="form-row form-row-wide"><input type="text" id="calc_shipping_postcode" name="calc_shipping_postcode" placeholder="Postcode / Zip" value="" class="input-text"></p>
-
-
-                                <p><button class="button" value="1" name="calc_shipping" type="submit">Update Totals</button></p>
-
-                                </section>
-                            </form>
-
 
                             </div>
                         </div>                        

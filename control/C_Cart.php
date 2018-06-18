@@ -6,32 +6,34 @@
 
     if (isset($_COOKIE['cart'])) {
 
-        $cartList_String = $_COOKIE['cart'];
-        $cartList = explode(',',$cartList_String);
-
         $productCartList = array();
         $productThumbImage = array();
         $quantity = array();
         $cartSubtotal = 0;
-
-        $prd = new Product();
         
-        foreach($cartList as $value) {
-            $singleProduct_cartDetail = explode('-',$value);
+        if ($_COOKIE['cart'] !== '') {
+            $cartList_String = $_COOKIE['cart'];
+            $cartList = explode(',',$cartList_String);
 
-            $id = $singleProduct_cartDetail[0];
-            $qty = $singleProduct_cartDetail[1];
+            $prd = new Product();
+        
+            foreach($cartList as $value) {
+                $singleProduct_cartDetail = explode('-',$value);
 
-            $quantity["$id"] = $qty;
+                $id = $singleProduct_cartDetail[0];
+                $qty = $singleProduct_cartDetail[1];
 
-            $product_resource = $prd->SelectProductByID($id);
-            $row = $product_resource->fetch_assoc();
+                $quantity["$id"] = $qty;
+
+                $product_resource = $prd->SelectProductByID($id);
+                $row = $product_resource->fetch_assoc();
             
-            $productCartList[] = $row;
+                $productCartList[] = $row;
             
-            $thumbnail_resource = $prd->SelectProductThumbnailImageByProductID($id);
-            $productThumbImage["$id"] = $thumbnail_resource->fetch_assoc();
-        }
+                $thumbnail_resource = $prd->SelectProductThumbnailImageByProductID($id);
+                $productThumbImage["$id"] = $thumbnail_resource->fetch_assoc();
+            }
+        } 
 
         include '../view/cart.php';
     }

@@ -41,10 +41,57 @@ function GetCookieValue(cname) {
     return "";
 }
 
+function DeleteCartProductCookie(pID) {
+    var cartList = GetCookieValue("cart");
+    list = cartList.split(',');
+
+    var index = ProductExist(pID);
+    console.log(index);
+    if (index != -1) { //if the product i already in cart
+        
+        var old_pValue = (index == 0)? "": cartList.charAt(index-1);
+        for (var i =index; i < cartList.length;++i) {
+            if (i < cartList.length || cartList.charAt(i) != ',') {
+                old_pValue += cartList.charAt(i);
+                console.log(old_pValue);
+            }
+            else {
+                break;
+            }
+        }
+        console.log("3");
+        cartList = cartList.replace(old_pValue,"");
+
+        console.log("setcookie");
+    
+        SetCookie("cart", cartList, 4, "");
+    }
+}
+
+function ProductExist(pID) {
+    var cartList = GetCookieValue("cart");
+    list = cartList.split(',');
+
+    var index;
+    var str = "";
+    for (var i =0; i < list.length; ++i) {
+        
+        index = list[i].indexOf(pID);
+        if (index == 0) {
+            return str.length;
+        }
+        str += list[i] + ",";
+    }
+
+    return -1;
+}
+
 function AddCartProductCookie(pID, pQuantity) {
     var cartList = GetCookieValue("cart");
+    list = cartList.split(',');
+
     var pValue = pID + '-' + pQuantity;
-    var index = cartList.indexOf(pID);
+    var index = ProductExist(pID);
     
     if (index != -1) { //if the product i already in cart
         var old_pValue = "";

@@ -39,6 +39,13 @@
     <![endif]-->
   </head>
   <body>
+    <Script> 
+        var cartCheck = GetCookieValue("cart");
+
+        if (cartCheck == "") {
+            SetCookie("cart","",4,"");
+        }
+    </script>
    
     <div class="header-area">
         <div class="container">
@@ -118,9 +125,9 @@
                             <div class="dropdown">
                                 <button class="dropbtn">SẢN PHẨM</button>
                                 <div class="dropdown-content">
-                                  <a href="http://localhost/final/control/C_Product.php?category=ao">ÁO</a>
-                                  <a href="http://localhost/final/control/C_Product.php?category=quan">QUẦN</a>
-                                  <a href="http://localhost/final/control/C_Product.php?category=giay">GIÀY DÉP</a>
+                                  <a href="http://localhost/final/control/C_Product.php?category=ao&page=1">ÁO</a>
+                                  <a href="http://localhost/final/control/C_Product.php?category=quan&page=1">QUẦN</a>
+                                  <a href="http://localhost/final/control/C_Product.php?category=giay&page=1">GIÀY DÉP</a>
                                 </div>
                             </div>
                         </li>

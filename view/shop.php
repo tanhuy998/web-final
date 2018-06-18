@@ -183,17 +183,17 @@
                         <nav>
                           <ul class="pagination">
                             <li>
-                              <a href="#" aria-label="Previous">
+                              <a href="<?php if($currentPage != 1) { echo "<li><a href=\"http://localhost/final/control/C_Product.php?category=ao&page=".($currentPage - 1)."\">$i</a></li>";} else {echo "#";}?>" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                               </a>
                             </li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
+                            <?php
+                                for ($i = 1; $i <= $maxPage; ++$i) {
+                                    echo "<li><a href=\"http://localhost/final/control/C_Product.php?category=ao&page=$i\">$i</a></li>";
+                                }
+                            ?>
                             <li>
-                              <a href="#" aria-label="Next">
+                              <a href="<?php if($currentPage != $maxPage) { echo "<li><a href=\"http://localhost/final/control/C_Product.php?category=ao&page=".($currentPage + 1)."\">$i</a></li>";} else {echo "#";}?>" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
                               </a>
                             </li>
