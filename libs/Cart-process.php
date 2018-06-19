@@ -9,23 +9,27 @@
         if (isset($_COOKIE['cart'])) {
 
             $cartList_String = $_COOKIE['cart'];
-            $cartList = explode(',',$cartList_String);
 
-            $prd = new Product();
+            if ($cartList_String != '') {
+                $cartList = explode(',',$cartList_String);
+
+                $prd = new Product();
         
-            foreach($cartList as $value) {
-                $singleProduct_cartDetail = explode('-',$value);
+                foreach($cartList as $value) {
+                    $singleProduct_cartDetail = explode('-',$value);
 
-                $id = $singleProduct_cartDetail[0];
+                    $id = $singleProduct_cartDetail[0];
 
-                ++$quantity;
+                    ++$quantity;
 
-                $product_resource = $prd->SelectProductByID($id);
-                $row = $product_resource->fetch_assoc();
+                    $product_resource = $prd->SelectProductByID($id);
+                    $row = $product_resource->fetch_assoc();
             
-                $total += $row['GIA'];
+                    $total += intval($row['GIA']) * intval($singleProduct_cartDetail[1]);
 
+                }
             }
+            
         }
 
 

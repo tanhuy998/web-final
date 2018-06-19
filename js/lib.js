@@ -49,14 +49,21 @@ function DeleteCartProductCookie(pID) {
     console.log(index);
     if (index != -1) { //if the product i already in cart
         
-        var old_pValue = (index == 0)? "": cartList.charAt(index-1);
+        var old_pValue = "";
+        //(index == 0)? "": cartList.charAt(index-1);
         for (var i =index; i < cartList.length;++i) {
-            if (i < cartList.length || cartList.charAt(i) != ',') {
+            if (i < cartList.length && cartList.charAt(i) != ',') {
                 old_pValue += cartList.charAt(i);
                 console.log(old_pValue);
             }
             else {
-                break;
+                if (cartList.charAt(i) == ',') {
+                    old_pValue += cartList.charAt(i);
+                    break;
+                }
+                else {
+                    break;
+                }
             }
         }
         console.log("3");
@@ -121,141 +128,140 @@ function AddCartProductCookie(pID, pQuantity) {
     //SetShopingCart();
 }
 
-function PrintProductsToCartTable() {
-    var cookie = document.cookie;
-    var productsList = cookie.split("; ");
-    console.log(document.cookie);
-    //var cartTotal = 0;
-    //var productsCount = productsList.length - 1;
+// function PrintProductsToCartTable() {
+//     var cookie = document.cookie;
+//     var productsList = cookie.split("; ");
+//     console.log(document.cookie);
+//     //var cartTotal = 0;
+//     //var productsCount = productsList.length - 1;
 
-    for ( i = 0; i < productsList.length; ++i) {
-        var nameValue = productsList[i].split('=');
-        var name = nameValue[0];
+//     for ( i = 0; i < productsList.length; ++i) {
+//         var nameValue = productsList[i].split('=');
+//         var name = nameValue[0];
 
-        if (name == 'carttotal' || name == 'ship') { continue;}
+//         if (name == 'carttotal' || name == 'ship') { continue;}
         
-        var value = nameValue[1].split("-");
-        console.log(name);
+//         var value = nameValue[1].split("-");
+//         console.log(name);
 
-        // get all attribute of product
-        var price = value[0];
-        var quantity = value[1];
-        var total = value[2];
-        var img = value[3];
-        var path = value[4];
-        SetHTMLTag(name,price,quantity,img,total,path);
+//         // get all attribute of product
+//         var price = value[0];
+//         var quantity = value[1];
+//         var total = value[2];
+//         var img = value[3];
+//         var path = value[4];
+//         SetHTMLTag(name,price,quantity,img,total,path);
 
-        //cartTotal += parseInt(total);
-        //console.log(cartTotal);  
-    }
+//         //cartTotal += parseInt(total);
+//         //console.log(cartTotal);  
+//     }
 
-    //var cartTotalCValue = cartTotal.toString() + "-" + productsCount.toString();
-    //SetCookie("carttotal",cartTotalCValue,1,"");
-}
+//     //var cartTotalCValue = cartTotal.toString() + "-" + productsCount.toString();
+//     //SetCookie("carttotal",cartTotalCValue,1,"");
+// }
 
-function SetShopingCart() {
-    var cookie = document.cookie;
-    var productsList = cookie.split("; ");
-    console.log(document.cookie);
-    var cartTotal = 0;
-    var productsCount = 0; //= productsList.length - 2;
+// function SetShopingCart() {
+//     var cookie = document.cookie;
+//     var productsList = cookie.split("; ");
+//     console.log(document.cookie);
+//     var cartTotal = 0;
+//     var productsCount = 0; //= productsList.length - 2;
 
-    for ( i = 0; i < productsList.length; ++i) {
-        var nameValue = productsList[i].split('=');
-        var name = nameValue[0];
+//     for ( i = 0; i < productsList.length; ++i) {
+//         var nameValue = productsList[i].split('=');
+//         var name = nameValue[0];
 
-        if (name == 'carttotal' || name == 'ship') { continue;}
+//         if (name == 'carttotal' || name == 'ship') { continue;}
         
-        var value = nameValue[1].split("-");
-        console.log(name);
+//         var value = nameValue[1].split("-");
+//         console.log(name);
 
-        // get all attribute of product
-        var price = value[0];
-        var total = value[2];
+//         // get all attribute of product
+//         var price = value[0];
+//         var total = value[2];
 
-        cartTotal += parseInt(total);
-        productsCount += 1;
-        console.log(cartTotal);  
-    }
+//         cartTotal += parseInt(total);
+//         productsCount += 1;
+//         console.log(cartTotal);  
+//     }
 
-    console.log(cartTotal);
-    var cartTotalCValue = cartTotal.toString() + "-" + productsCount.toString();
-    SetCookie("carttotal",cartTotalCValue,1,"");
+//     console.log(cartTotal);
+//     var cartTotalCValue = cartTotal.toString() + "-" + productsCount.toString();
+//     SetCookie("carttotal",cartTotalCValue,1,"");
 
-    CartTotal();
-}
+//     CartTotal();
+// }
 
-function PrintCheckout() {
-    var cookie = document.cookie;
-    var productsList = cookie.split("; ");
-    console.log(document.cookie);
-    //var cartTotal = 0;
-    //var productsCount = productsList.length - 1;
+// function PrintCheckout() {
+//     var cookie = document.cookie;
+//     var productsList = cookie.split("; ");
+//     console.log(document.cookie);
+//     //var cartTotal = 0;
+//     //var productsCount = productsList.length - 1;
 
-    for ( i = 0; i < productsList.length; ++i) {
-        var nameValue = productsList[i].split('=');
-        var name = nameValue[0];
+//     for ( i = 0; i < productsList.length; ++i) {
+//         var nameValue = productsList[i].split('=');
+//         var name = nameValue[0];
 
-        if (name == 'carttotal' || name == 'ship') { continue;}
+//         if (name == 'carttotal' || name == 'ship') { continue;}
         
-        var value = nameValue[1].split("-");
-        console.log(name);
+//         var value = nameValue[1].split("-");
+//         console.log(name);
 
-        // get all attribute of product
-        var price = value[0];
-        var quantity = value[1];
-        var total = value[2];
-        //var img = value[3];
-        //var path = value[4];
-        SetCheckoutTag(name,total,quantity);
+//         // get all attribute of product
+//         var price = value[0];
+//         var quantity = value[1];
+//         var total = value[2];
+//         //var img = value[3];
+//         //var path = value[4];
+//         SetCheckoutTag(name,total,quantity);
 
-        //cartTotal += parseInt(total);
-        //console.log(cartTotal);  
-    }
+//         //cartTotal += parseInt(total);
+//         //console.log(cartTotal);  
+//     }
 
-    var ship = GetCookieValue("ship");
-    document.getElementById("#ship").innerHTML = ship;
+//     var ship = GetCookieValue("ship");
+//     document.getElementById("#ship").innerHTML = ship;
 
-    var cookieTotal = GetCookieValue("carttotal");
-    var value = cookieTotal.split("-");
-    var cartTotal = value[0];
-    document.getElementById("#sub").innerHTML = cartTotal;
-    var totalWithShip = parseInt(cartTotal) + parseInt(ship);
-    document.getElementById("#total").innerHTML = totalWithShip;
-}
+//     var cookieTotal = GetCookieValue("carttotal");
+//     var value = cookieTotal.split("-");
+//     var cartTotal = value[0];
+//     document.getElementById("#sub").innerHTML = cartTotal;
+//     var totalWithShip = parseInt(cartTotal) + parseInt(ship);
+//     document.getElementById("#total").innerHTML = totalWithShip;
+// }
 
-function CartTotal() {
+// function CartTotal() {
     
-    var cartValue = GetCookieValue("carttotal").split("-");
-    var total = cartValue[0];
-    var productCount = cartValue[1];
-    console.log(total);
+//     var cartValue = GetCookieValue("carttotal").split("-");
+//     var total = cartValue[0];
+//     var productCount = cartValue[1];
+//     console.log(total);
 
-    document.getElementById("#amount").innerHTML = total;
-    document.getElementById("#count").innerHTML = productCount;
-}
+//     document.getElementById("#amount").innerHTML = total;
+//     document.getElementById("#count").innerHTML = productCount;
+// }
 
-function UpdateCart() {
-    var cartValue = GetCookieValue("carttotal").split("-");
-    var total = cartValue[0];
-    var productCount = cartValue[1];
-    console.log(total);
+// function UpdateCart() {
+//     var cartValue = GetCookieValue("carttotal").split("-");
+//     var total = cartValue[0];
+//     var productCount = cartValue[1];
+//     console.log(total);
 
-    document.getElementById("#a1").innerHTML += total;
-}
+//     document.getElementById("#a1").innerHTML += total;
+// }
 
-SetCookie("ship","0",1,"");
 
-function TotalWithShip() {
-    var strShip = document.getElementById("#s").innerText;
-    var shipCost = parseInt(strShip);
-    console.log(shipCost);
-    var strTotal = document.getElementById("#a1").innerText;
-   //var total = 
-    var total = shipCost + parseInt(strTotal);
-    console.log("");
-    document.getElementById("#a2").innerHTML += total;
-}
+// function TotalWithShip() {
+//     var strShip = document.getElementById("#s").innerText;
+//     var shipCost = parseInt(strShip);
+//     console.log(shipCost);
+//     var strTotal = document.getElementById("#a1").innerText;
+//    //var total = 
+//     var total = shipCost + parseInt(strTotal);
+//     console.log("");
+//     document.getElementById("#a2").innerHTML += total;
+// }
 
 function SetHTMLTag(className,price,quantity,img,total,path) {
     console.log("sethtml");
@@ -269,11 +275,11 @@ function SetHTMLTag(className,price,quantity,img,total,path) {
     document.getElementById("cart-list").innerHTML += tag;
 }
 
-function SetCheckoutTag(className,totalPrice,quantity) {
-    var tag = "<tr class=\"cart_item\"> <td class=\"product-name\">" + className + "<strong class=\"product-quantity\">×" + quantity + "</strong> </td> <td class=\"product-total\"> <span class=\"amount\">$" + totalPrice + "</span> </td> </tr>";
-    document.getElementById("#cart-item").innerHTML += tag;
+// function SetCheckoutTag(className,totalPrice,quantity) {
+//     var tag = "<tr class=\"cart_item\"> <td class=\"product-name\">" + className + "<strong class=\"product-quantity\">×" + quantity + "</strong> </td> <td class=\"product-total\"> <span class=\"amount\">$" + totalPrice + "</span> </td> </tr>";
+//     document.getElementById("#cart-item").innerHTML += tag;
     
-}
+// }
 
 
 
@@ -303,20 +309,20 @@ toggle between hiding and showing the dropdown content */
 
 // Close the dropdown if the user clicks outside of it
 
-function SearchProducts() {
+// function SearchProducts() {
 
-    var input, filter, ul, li, a, i;
-    input = document.getElementById("myInput");
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("myUL");
-    li = ul.getElementsByClassName("search");
-    console.log("search");
-    for (i = 0; i < li.length; i++) {
-        a = li[i].getElementsByTagName("a")[0];
-        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else {
-            li[i].style.display = "none";
-        }
-    }
-}
+//     var input, filter, ul, li, a, i;
+//     input = document.getElementById("myInput");
+//     filter = input.value.toUpperCase();
+//     ul = document.getElementById("myUL");
+//     li = ul.getElementsByClassName("search");
+//     console.log("search");
+//     for (i = 0; i < li.length; i++) {
+//         a = li[i].getElementsByTagName("a")[0];
+//         if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+//             li[i].style.display = "";
+//         } else {
+//             li[i].style.display = "none";
+//         }
+//     }
+// }

@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="http://localhost/final/css/owl.carousel.css">
     <link rel="stylesheet" href="http://localhost/final/css/style.css">
     <link rel="stylesheet" href="http://localhost/final/css/responsive.css">
+    <link rel="stylesheet" href="http://localhost/final/css/dropstyle.css">
     <script type="text/javascript" src="../js/lib.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -110,14 +111,23 @@
                 </div> 
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="index.html">Home</a></li>
-                        <li class="active"><a href="shop.html">Shop page</a></li>
-                        <li><a href="single-product.html">Single product</a></li>
-                        <li><a href="cart.html">Cart</a></li>
-                        <li><a href="checkout.html">Checkout</a></li>
+                        <li><a href="http://localhost/final/view/index.php">TRANG CHỦ</a></li>
+                        <li class="active" >
+                            <div class="dropdown">
+                                <button class="dropbtn">SẢN PHẨM</button>
+                                <div class="dropdown-content">
+                                  <a href="http://localhost/final/control/C_Product.php?category=ao&page=1">ÁO</a>
+                                  <a href="http://localhost/final/control/C_Product.php?category=quan&page=1">QUẦN</a>
+                                  <a href="http://localhost/final/control/C_Product.php?category=giay&page=1">GIÀY DÉP</a>
+                                </div>
+                            </div>
+                        </li>
+                        <!--<li><a href="#">Single product</a></li> -->
+                        <li><a href="http://localhost/final/control/C_Cart.php">GIỎ HÀNG</a></li>
+                        <li><a href="http://localhost/final/control/C_Checkout.php">THANH TOÁN</a></li>
                         <!-- <li><a href="#">Category</a></li> -->
                         <!-- <li><a href="#">Others</a></li> -->
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">LIÊN HỆ</a></li>
                     </ul>
                 </div>  
             </div>
@@ -291,13 +301,13 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     
     <!-- jQuery sticky menu -->
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.sticky.js"></script>
+    <script src="../js/owl.carousel.min.js"></script>
+    <script src="../js/jquery.sticky.js"></script>
     
     <!-- jQuery easing -->
-    <script src="js/jquery.easing.1.3.min.js"></script>
+    <script src="../js/jquery.easing.1.3.min.js"></script>
     
     <!-- Main Script -->
-    <script src="js/main.js"></script>
+    <script src="../js/main.js"></script>
   </body>
 </html>

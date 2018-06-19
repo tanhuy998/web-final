@@ -150,7 +150,7 @@ z-index: 999;}
 }
 
 
-.mainmenu-area ul.navbar-nav li:hover a,.mainmenu-area ul.navbar-nav li:hover div, .mainmenu-area ul.navbar-nav li.active a {background: #222}
+.mainmenu-area ul.navbar-nav li:hover a,.mainmenu-area ul.navbar-nav li:hover div, .mainmenu-area ul.navbar-nav li.active a, {background: #222}
 .mainmenu-area .nav > li > a:focus {color: #000}
 
 .slider-area {clear: both}

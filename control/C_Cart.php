@@ -1,6 +1,8 @@
 <?php 
+    session_start();
     require_once '../model/M_Product.php';
     require_once '../libs/Cart-process.php';
+
 
     CartProcess();
 

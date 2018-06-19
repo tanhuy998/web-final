@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <script type="text/javascript" src="js/lib.js"></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,7 +22,7 @@
     <link rel="stylesheet" href="http://localhost/final/css/style.css">
     <link rel="stylesheet" href="http://localhost/final/css/responsive.css">
     <link rel="stylesheet" href="http://localhost/final/css/dropstyle.css">
-    <Script type="text/javascript" scr="../js/lib.js"> </script>
+    <Script type="text/javascript" src="../js/lib.js"> </script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -87,7 +86,7 @@
                 
                 <div class="col-sm-6">
                     <div class="shopping-item">
-                    <a href="cart.html">Giỏ hàng - <span class="cart-amunt"><?php echo $GLOBALS['cart-total'];?> VNĐ</span> <i class="fa fa-shopping-cart"></i> <span class="product-count"><?php echo $GLOBALS['cart-qty'];?></span></a>
+                    <a href="cart.html">Giỏ hàng - <span class="cart-amunt"><?php echo number_format($GLOBALS['cart-total']);?> VNĐ</span> <i class="fa fa-shopping-cart"></i> <span class="product-count"><?php echo $GLOBALS['cart-qty'];?></span></a>
                     </div>
                 </div>
             </div>
@@ -107,14 +106,23 @@
                 </div> 
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="shop.html">Shop page</a></li>
-                        <li><a href="single-product.html">Single product</a></li>
-                        <li class="active"><a href="#">Cart</a></li>
-                        <li><a href="checkout.html">Checkout</a></li>
+                        <li><a href="http://localhost/final/view/index.php">TRANG CHỦ</a></li>
+                        <li>
+                            <div class="dropdown">
+                                <button class="dropbtn">SẢN PHẨM</button>
+                                <div class="dropdown-content">
+                                  <a href="http://localhost/final/control/C_Product.php?category=ao&page=1">ÁO</a>
+                                  <a href="http://localhost/final/control/C_Product.php?category=quan&page=1">QUẦN</a>
+                                  <a href="http://localhost/final/control/C_Product.php?category=giay&page=1">GIÀY DÉP</a>
+                                </div>
+                            </div>
+                        </li>
+                        <!--<li><a href="#">Single product</a></li> -->
+                        <li class="active"><a href="http://localhost/final/control/C_Cart.php">GIỎ HÀNG</a></li>
+                        <li><a href="http://localhost/final/control/C_Checkout.php">THANH TOÁN</a></li>
                         <!-- <li><a href="#">Category</a></li> -->
                         <!-- <li><a href="#">Others</a></li> -->
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">LIÊN HỆ</a></li>
                     </ul>
                 </div>  
             </div>
@@ -213,12 +221,12 @@
                                                 $id = $product['ID'];
                                                 $totalPrice = $product['GIA'] * intval($quantity["$id"]);
                                                 $cartSubtotal += $totalPrice;
-                                                echo "<tr class=\"cart_item\"><td class=\"product-remove\" onclick=\"\"> <a title=\"Remove this item\" class=\"remove\" href=\"#\">×</a> </td>";
+                                                echo "<tr class=\"cart_item\"><td class=\"product-remove\" onclick=\"DeleteCartProductCookie($id);location.reload()\"> <a title=\"Remove this item\" class=\"remove\" href=\"#\">×</a> </td>";
                                                 echo "<td class=\"product-thumbnail\"><a href=\"http://localhost/final/control/C_Single-Product.php?id=$id\"><img width=\"145\" height=\"145\" alt=\"poster_1_up\" class=\"shop_thumbnail\" src=\"".$productThumbImage["$id"]['DUONGDAN']."\"></a></td>";
                                                 echo "<td class=\"product-name\"><a href=\"http://localhost/final/controle/C_Single-Product.php?id=$id\">".$product['TENSANPHAM']."</a></td>";
-                                                echo "<td class=\"product-price\"><span class=\"amount\">".$product['GIA']." VNĐ</span></td>";
-                                                echo "<td class=\"product-quantity\"><div class=\"quantity buttons_added\"><input type=\"number\" size=\"4\" class=\"input-text qty text\" title=\"Qty\" value=\"".$quantity["$id"]."\" min=\"1\" step=\"1\"></div></td>";
-                                                echo "<td class=\"product-subtotal\"><span class=\"amount\">$totalPrice VNĐ</span></td></tr>";
+                                                echo "<td class=\"product-price\"><span class=\"amount\">".number_format($product['GIA'])." VNĐ</span></td>";
+                                                echo "<td class=\"product-quantity\"><div class=\"quantity buttons_added\"><input id=\"$id\" type=\"number\" size=\"4\" class=\"input-text qty text\" title=\"Qty\" value=\"".$quantity["$id"]."\" min=\"1\" onchange=\"AddCartProductCookie($id,GetQuantity($id))\" step=\"1\"></div></td>";
+                                                echo "<td class=\"product-subtotal\"><span class=\"amount\">".number_format($totalPrice)." VNĐ</span></td></tr>";
 
                                             }
                                             
@@ -397,13 +405,13 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     
     <!-- jQuery sticky menu -->
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.sticky.js"></script>
+    <script src="../js/owl.carousel.min.js"></script>
+    <script src="../js/jquery.sticky.js"></script>
     
     <!-- jQuery easing -->
-    <script src="js/jquery.easing.1.3.min.js"></script>
+    <script src="../js/jquery.easing.1.3.min.js"></script>
     
     <!-- Main Script -->
-    <script src="js/main.js"></script>
+    <script src="../js/main.js"></script>
   </body>
 </html>

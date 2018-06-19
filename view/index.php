@@ -1,6 +1,11 @@
 <?php
+    session_start();
     require '../libs/Cart-process.php';
-
+    require '../libs/LoginStatus.php';
+    
+    login::Start();
+    $a = $_SESSION['user'];
+    echo $a;
     CartProcess();
 ?>    
 
@@ -131,12 +136,12 @@
                                 </div>
                             </div>
                         </li>
-                        <li><a href="#">Single product</a></li>
-                        <li><a href="http://localhost/final/control/C_Cart.php">Cart</a></li>
-                        <li><a href="checkout.html">Checkout</a></li>
+                        <!--<li><a href="#">Single product</a></li> -->
+                        <li><a href="http://localhost/final/control/C_Cart.php">GIỎ HÀNG</a></li>
+                        <li><a href="http://localhost/final/control/C_Checkout.php">THANH TOÁN</a></li>
                         <!-- <li><a href="#">Category</a></li> -->
                         <!-- <li><a href="#">Others</a></li> -->
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">LIÊN HỆ</a></li>
                     </ul>
                 </div>  
             </div>
@@ -398,13 +403,13 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     
     <!-- jQuery sticky menu -->
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.sticky.js"></script>
+    <script src="../js/owl.carousel.min.js"></script>
+    <script src="../js/jquery.sticky.js"></script>
     
     <!-- jQuery easing -->
-    <script src="js/jquery.easing.1.3.min.js"></script>
+    <script src="../js/jquery.easing.1.3.min.js"></script>
     
     <!-- Main Script -->
-    <script src="js/main.js"></script>
+    <script src="../js/main.js"></script>
   </body>
 </html>
