@@ -161,29 +161,47 @@
                     //$db = new Database();
                     //$sql = "SELECT * FROM product JOIN product_tag IN product.ID = product_tag.IDSANPHAM WHERE product_tag.TENTAG = \"".$type."\"";
                     
-                    
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
+                    foreach ($result as $row) {
+                        $image = $prd->SelectProductImageByProductID($row['ID']);
+                        $thumb = $image->fetch_assoc();
                             
-                            $image = $prd->SelectProductImageByProductID($row['ID']);
-                            $thumb = $image->fetch_assoc();
-                            
-                            echo "<div class=\"col-md-3 col-sm-6\">";
-                            echo "<div class=\"single-shop-product\">";
-                            echo    "<div class=\"product-upper\">";
-                            echo        "<a href=\"http://localhost/final/control/C_Single-product.php?id=".$row['ID']."&category=".$type."\"><img src=\"".$thumb['DUONGDAN']."\" alt=\"img\"></a>";
-                            echo   "</div>";
-                            echo    "<h2><a href=\"http://localhost/final/control/C_Single-product.php?id=".$row['ID']."&category=".$type."\">".$row['TENSANPHAM']."</a></h2>";
-                            echo    "<div class=\"product-carousel-price\">";
-                            echo        "<ins>".$row['GIA']."</ins>";
-                            echo     "</div>";
+                        echo "<div class=\"col-md-3 col-sm-6\">";
+                        echo "<div class=\"single-shop-product\">";
+                        echo    "<div class=\"product-upper\">";
+                        echo        "<a href=\"http://localhost/final/control/C_Single-product.php?id=".$row['ID']."&category=".$type."\"><img src=\"".$thumb['DUONGDAN']."\" alt=\"img\"></a>";
+                        echo   "</div>";
+                        echo    "<h2><a href=\"http://localhost/final/control/C_Single-product.php?id=".$row['ID']."&category=".$type."\">".$row['TENSANPHAM']."</a></h2>";
+                        echo    "<div class=\"product-carousel-price\">";
+                        echo        "<ins>".$row['GIA']."</ins>";
+                        echo     "</div>";
                                 
-                            echo    "<div class=\"product-option-shop\">";
-                            echo        "<a class=\"add_to_cart_button\" data-quantity=\"1\" data-product_sku=\"\" data-product_id=\"70\" rel=\"nofollow\" href=\"#\" onclick=\"AddCartProductCookie(".$row['ID'].",'1')\">Thêm vào giỏ</a>";
-                            echo    "</div></div> </div>";
-                        }
+                        echo    "<div class=\"product-option-shop\">";
+                        echo        "<a class=\"add_to_cart_button\" data-quantity=\"1\" data-product_sku=\"\" data-product_id=\"70\" rel=\"nofollow\" href=\"#\" onclick=\"AddCartProductCookie(".$row['ID'].",'1')\">Thêm vào giỏ</a>";
+                        echo    "</div></div> </div>";
                     }
-                    else echo "ERROR";
+                    
+                    // if ($result->num_rows > 0) {
+                    //     while ($row = $result->fetch_assoc()) {
+                            
+                    //         $image = $prd->SelectProductImageByProductID($row['ID']);
+                    //         $thumb = $image->fetch_assoc();
+                            
+                    //         echo "<div class=\"col-md-3 col-sm-6\">";
+                    //         echo "<div class=\"single-shop-product\">";
+                    //         echo    "<div class=\"product-upper\">";
+                    //         echo        "<a href=\"http://localhost/final/control/C_Single-product.php?id=".$row['ID']."&category=".$type."\"><img src=\"".$thumb['DUONGDAN']."\" alt=\"img\"></a>";
+                    //         echo   "</div>";
+                    //         echo    "<h2><a href=\"http://localhost/final/control/C_Single-product.php?id=".$row['ID']."&category=".$type."\">".$row['TENSANPHAM']."</a></h2>";
+                    //         echo    "<div class=\"product-carousel-price\">";
+                    //         echo        "<ins>".$row['GIA']."</ins>";
+                    //         echo     "</div>";
+                                
+                    //         echo    "<div class=\"product-option-shop\">";
+                    //         echo        "<a class=\"add_to_cart_button\" data-quantity=\"1\" data-product_sku=\"\" data-product_id=\"70\" rel=\"nofollow\" href=\"#\" onclick=\"AddCartProductCookie(".$row['ID'].",'1')\">Thêm vào giỏ</a>";
+                    //         echo    "</div></div> </div>";
+                    //     }
+                    // }
+                    // else echo "ERROR";
                 ?>
             </div>
             

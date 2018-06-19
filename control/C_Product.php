@@ -24,13 +24,17 @@
             $type = $_GET['category'];
         }
     }
-
-    $prd = new Product();
-    $result = $prd->SelectProductByTag($type);
-    
-    $temp1 = intval($result->num_rows / 8);
-    $temp2 = ($result->num_rows % 8) == 0? 0 : 1;
     $currentPage = $_GET['page'];
+    $prd = new Product();
+    $result = $prd->SelectProductByTagWithPage($type,intval($currentPage));
+    //$result = $prd->SelectProductByTag($type);
+    $product_count = $prd->ProductCount();
+
+    //$temp1 = intval($result->num_rows / 8);
+    //$temp2 = ($result->num_rows % 8) == 0? 0 : 1;
+    $temp1 = intval($product_count / 8);
+    $temp2 = intval($product_count % 8) == 0? 0: 1;
+    
     $maxPage = $temp1 + $temp2;
 
     include '../view/shop.php';
