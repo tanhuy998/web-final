@@ -5,11 +5,11 @@
     require_once '../libs/HashCode.php';
     
     $user = new LogIn();
-    $user->StartWithIdentifier('user','user');
+    $user->StartWithIdentifier('asdas','qwrwf');
     $_SESSION['user'] = $user;
     if ( isset($_SESSION['user'])){
-        echo $_SESSION['user']->IsAnonymous()?1:0;
-        //echo ($user->GetInformation())? 1:0;
+        echo $user->IsAnonymous()?1:0;
+        echo ($user->GetInformation())? 1:0;
         //echo $user->GetInformation()['TEN'];
     }
     //echo '<br>'.hashCode('user');

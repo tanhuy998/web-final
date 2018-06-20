@@ -109,14 +109,14 @@
         */
         public function Start() {
             // check when there is a login session
-            if (!isset($_SESSION['user'])) { // if there is no user login
-                echo 1;
+            //if (!isset($_SESSION['user'])) { // if there is no user login
+            //    echo 1;
                 /*
-                    Now we have two situation
-                    situation #1: there is no access token in cookie. So we create an access token for account Anonymous type for non member viseter
-                    situation #2: there is an access token in cookie. We must check the token is valid or not
-                                    if the token is valid so we store the id of user for session
-                                    else we create an access token for account Anonymous type for non-member for session
+                 *  Now we have two situation
+                 *  situation #1: there is no access token in cookie. So we create an access token for account Anonymous type for non member viseter
+                 *  situation #2: there is an access token in cookie. We must check the token is valid or not
+                 *                  if the token is valid so we store the id of user for session
+                 *                  else we create an access token for account Anonymous type for non-member for session
                  */
                 // check for access token in cookie
                 if (!isset($_COOKIE['token'])) { // Situation #1 if there is  no login session in cookie
@@ -152,7 +152,7 @@
                         $this->Out();
                     }
                 }
-            }
+            //}
         }
 
         /*
@@ -188,14 +188,7 @@
                 setcookie('token',$token, time() + (86400 *30),'/');
             }
             else { // if account doesn't exist 
-                $token = AccessToken::AnonymousToken();
-                
-                // set cookie name "token" which envaluate to anonymous account
-                setcookie('token',$token, time() + (86400 *30),'/'); // $token variable here always valid because it's returned by AccessToken::Anonoymous()
-                //$_SESSION['user'] = AccessToken::GetID($token);
-                //$_SESSION['permit'] = convert_uuencode('anonymous');
-                $this->id = AccessToken::GetID($token);
-                $this->permission = convert_uuencode('anonymous');
+                $this->Out();
             }
         } 
 
@@ -207,6 +200,7 @@
         public function IsAnonymous() {
             $permit = convert_uudecode($this->permission);
             //echo $permit;
+            echo $permit;
             return ($permit == 'anonymous');
         }
 
