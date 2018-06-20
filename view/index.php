@@ -1,11 +1,18 @@
 <?php
     session_start();
-    require '../libs/Cart-process.php';
-    require '../libs/LoginStatus.php';
+    require_once '../libs/Cart-process.php';
+    require_once '../libs/LoginStatus.php';
+    require_once '../libs/HashCode.php';
     
-    login::Start();
-    $a = $_SESSION['user'];
-    echo $a;
+    $user = new LogIn();
+    $user->StartWithIdentifier('user','user');
+    $_SESSION['user'] = $user;
+    if ( isset($_SESSION['user'])){
+        echo $_SESSION['user']->IsAnonymous()?1:0;
+        //echo ($user->GetInformation())? 1:0;
+        //echo $user->GetInformation()['TEN'];
+    }
+    //echo '<br>'.hashCode('user');
     CartProcess();
 ?>    
 
