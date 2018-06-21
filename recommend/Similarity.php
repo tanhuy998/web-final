@@ -1,4 +1,8 @@
 <?php
+    /*
+        this modul is part of the recommend system
+        the main task of this modul is colect, cleans and classify the data of products for Analytical modul
+    */
     require_once '../model/M_Product.php';
 
     /* 
