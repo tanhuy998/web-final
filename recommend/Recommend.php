@@ -46,13 +46,16 @@
 
         // this method get the visit list from a Tracker object to prepare for the recommend process 
         private function GetRecommendData(Tracker $_tracker) {
+            // the GetVisiList method return the sorted(descending) associative array of visited product of user 
             $tracking_data = $_tracker->GetVisitList();
-
+            echo count($tracking_data);
             $result = array();
+
+            // here just need three or less than most visited product 
             if (count($tracking_data) >= 3) {
                 $i = 0;
                 foreach($tracking_data as $id => $time) {
-                    if (i < 3) {
+                    if ($i < 3) {
                         $result[] = $id;
 
                         ++$i;
@@ -67,7 +70,7 @@
                     $result[] = $id;
                 }
             }
-            
+            //echo 'track'.count($result).'track';
             return $result;
         } 
 
@@ -84,21 +87,24 @@
             }
         }
 
+        // this funciton return a list of recommend products 
+        // the list is an associative array that key and value are both the ID of a product
         private function RecommendDBbaseMode() {
-            $db = new Database();
-
             $tracker = new Tracker();
             $recommend_list = $this->GetRecommendData($tracker);
 
             $result = array();
 
             if (count($recommend_list) > 0) {
-                // with each 3 most visited product, we will get 6 product for recommend
+                // with each 3 most visited product, we will get 6 product for recommend (2 for each most visited product)
                 foreach ($recommend_list as $id) {
-
+                    echo 'T'.$id.'T';
+                    $db = new Database();
                     $sql = "SELECT * FROM product_similar WHERE product_similar.IDSANPHAM1 = '$id' OR product_similar.IDSANPHAM2 = '$id' ORDER BY product_similar.DISTANCE LIMIT 5";
                     $resource = $db->SelectData($sql);
                     
+                    // the first_five most array will hold the most 5 similar product of a most visited product
+                    // it's lengh will depend on the data in the database but it's max length is 5
                     $first_five = array();
         
                         echo 1;
@@ -114,22 +120,47 @@
                             }
                         }
 
-                        $random_index1 = mt_rand(0,$resource->num_rows-1);
+                        // the max number of row of $resource is five 
+                        // the $first_five array has length equal to the number of row of $resource
+                        // but there is exception for if the the number of row of $resource can be equal to 1
+                        if ($resource->num_rows > 1) {
+                            // this loop statment will loop 2 time to get 2 product in the first five most similar product array
+                            // beacause of this 2-times loop that we must check if the $resource's num_rows > 1
+                            for ($j = 0; $j < 2; ++$j) {
+                                // here we will get the random index of the first_five most similar product array
+                                $random_index = mt_rand(0,$resource->num_rows-1); // type int
+                                // this is the id of the product already chosen randomly
+                                $ID = $first_five[$random_index];
+                                $i = 0;
+                                // if the choosen product is not exist in the $result array, push the product to the $result array
+                                if (!isset($result["$ID"])) {   
+                                    $result["$ID"] = $ID;
+                                }
+                                else { // else there 5 chances to rechoose new similar product
+                                    for ($i = 0; $i < 5; ++$i) {
+                                        $random_index = mt_rand(0,$resource->num_rows -1);
+                                        $ID = $first_five[$random_index];
 
-                        $result[] = $first_five[$random_index1];
-                        echo 4;
-                        if ($resource->num_rows >1) {
-                            $random_index2 = mt_rand(0,$resource->num_rows-1);
-                            while ($random_index2 == $random_index1) {
-                                echo 3;
-                                $random_index2 = mt_rand(0,$resource->num_rows-1);
+                                        if (!isset($result["$ID"])) {
+                                            $result["$ID"] = $ID;
+                                            break;
+                                        }
+                                    }
+                                }
                             }
-                            $result[] = $first_five[$random_index2];
+                        }   // this is an exception when the first_five array length is 1
+                        else if ($resource->num_rows == 1) {
+                            // just has one product
+                            $ID = $first_five[0];
+                            // if not exist in $result then push in
+                            if (!isset($result["$ID"])) {
+                                $result["$ID"] = $$ID;
+                            }
                         }
                     }
                 }
             }
-
+            // echo 'ka'.count($result);
             return $result;
         }
 
@@ -142,14 +173,15 @@
         }
     }
 
-    // $rcmd = new RecommendSystem('DBbase');
-    // $track = new Tracker();
-    // $track->Add(1);
-    // echo $rcmd->Mode();
+    $rcmd = new RecommendSystem('DBbase');
+    $track = new Tracker();
+    $track->Add(7);
+    echo $rcmd->Mode();
 
-    // $arr = $rcmd->Recommend();
-    // echo '<br>';
-    // foreach($arr as $id) {
-    //     echo $id.' ';
-    // }
+    $arr = $rcmd->Recommend();
+    echo '<br>';
+    echo 'recommend product (ID): ';
+    foreach($arr as $id) {
+        echo $id.' ';
+    }
 ?>
