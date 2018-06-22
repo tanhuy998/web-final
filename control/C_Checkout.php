@@ -2,7 +2,9 @@
     session_start();
     require_once '../model/M_Product.php';
     require_once '../libs/Cart-process.php';
-    
+    require_once '../recommend/Recommend.php';
+
+    // calculate for the mini cart icon
     CartProcess();
 
     if (isset($_COOKIE['cart'])) {
@@ -37,7 +39,19 @@
                 //$productThumbImage["$id"] = $thumbnail_resource->fetch_assoc();
             }
         } 
-    
+        
+        // for recommend
+        $rec = new RecommendSystem('DBbase');
+
+        $rec_list = $rec->Recommend();
+        $rec_product = array(); // remember this is an associative array
+
+        $prd = new Product();
+        foreach($rec_list as $key => $ID) {
+            $resource = $prd->SelectProductByID($ID);
+            $rec_product_list[] = $resource->fetch_assoc();
+        }
+
         include '../view/checkout.php';
     }
 ?>

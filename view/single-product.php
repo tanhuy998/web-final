@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <script type="text/javascript" src="js/lib.js"></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -157,37 +156,17 @@
                     </div>
                     
                     <div class="single-sidebar">
-                        <h2 class="sidebar-title">Sản phẩm liên quan</h2>
-                        <div class="thubmnail-recent">
-                            <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
-                            <h2><a href="">Sony Smart TV - 2015</a></h2>
-                            <div class="product-sidebar-price">
-                                <ins>$700.00</ins> <del>$800.00</del>
-                            </div>                             
-                        </div>
-                        <div class="thubmnail-recent">
-                            <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
-                            <h2><a href="">Sony Smart TV - 2015</a></h2>
-                            <div class="product-sidebar-price">
-                                <ins>$700.00</ins> <del>$800.00</del>
-                            </div>                             
-                        </div>
-                        <div class="thubmnail-recent">
-                            <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
-                            <h2><a href="">Sony Smart TV - 2015</a></h2>
-                            <div class="product-sidebar-price">
-                                <ins>$700.00</ins> <del>$800.00</del>
-                            </div>                             
-                        </div>
-                        <div class="thubmnail-recent">
-                            <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
-                            <h2><a href="">Sony Smart TV - 2015</a></h2>
-                            <div class="product-sidebar-price">
-                                <ins>$700.00</ins> <del>$800.00</del>
-                            </div>                             
-                        </div>
+                        <h2 class="sidebar-title">Sản phẩm đề xuất</h2>
+                        <?php
+                            foreach($rec_product_list as $rec_product) {
+                                echo '<div class="thubmnail-recent">';
+                                echo "<img src=\"img/product-thumb-1.jpg\" class=\"recent-thumb\" alt=\"\">";
+                                echo "<h2><a href=\"http://localhost/final/control/C_Single-Product.php?id=".$rec_product['ID']."\">".$rec_product['TENSANPHAM']."</a></h2>";
+                                echo "<div class=\"product-sidebar-price\"><ins>".$rec_product['GIA']." VNĐ</ins></div></div>";
+                            }
+                        ?>
                     </div>
-                    
+
                     <div class="single-sidebar">
                         <h2 class="sidebar-title">Recent Posts</h2>
                         <ul>
@@ -203,9 +182,7 @@
                 <div class="col-md-8">
                     <div class="product-content-right">
                         <div class="product-breadcroumb">
-                            <a href="http://localhost/final/view/index.html">Trang chủ</a>
-                            <a href="http://localhost/final/control/C_Product.php?category=<?php echo $category;?>"> <?php echo $category;?></a>
-                            <a href="#"> <?php echo $product['TENSANPHAM']; ?> </a>
+                            
                         </div>
                         
                         <div class="row">
@@ -306,6 +283,7 @@
                                 </div>
                             </div>
                         </div>
+                        
                         
                         
                         

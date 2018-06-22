@@ -5,7 +5,7 @@
     require_once '../libs/HashCode.php';
     
     $user = new LogIn();
-    $user->StartWithIdentifier('asdas','qwrwf');
+    $user->Start();
     $_SESSION['user'] = $user;
     if ( isset($_SESSION['user'])){
         echo $user->IsAnonymous()?1:0;

@@ -1,8 +1,8 @@
 <?php
     // controler for the shop page
     session_start();
-    require '../model/M_Product.php';
-    require '../libs/Cart-process.php';
+    require_once '../model/M_Product.php';
+    require_once '../libs/Cart-process.php';
     
 
     CartProcess();

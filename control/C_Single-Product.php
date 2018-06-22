@@ -3,6 +3,7 @@
     session_start();
     require_once '../model/M_Product.php';
     require_once '../libs/Cart-process.php';
+    require_once '../recommend/Recommend.php';
 
     CartProcess();
 
@@ -10,14 +11,18 @@
         $id = $_GET['id'];
         $prd = new Product();
 
-        $category = (isset($_GET['category']))? $_GET['category']: "null";
+        $track = new Tracker();
+        $track->Add($id);
+        
+
+        //$category = (isset($_GET['category']))? $_GET['category']: "null";
 
         $product_resource = $prd->SelectProductByID($id);
         $product_tag_resource = $prd->SelectProductTagByProductID($id);
         $product_image_resource = $prd->SelectProductImageByProductID($id);
         //$temp = $product_image_resource;
         $Thumb_image;
-        $product;
+        
 
         // get the first image from all images resourse of a product to be thumbnail image
         if ($product_image_resource->num_rows > 0) {
@@ -30,8 +35,19 @@
 
         // get the product from product resourse get by sql command
         // because one product pairs to one ID so just only fetch the resource one time
+        $product;
         if ($product_resource->num_rows > 0) {
             $product = $product_resource->fetch_assoc();
+        }
+
+        // for recommend 
+        $rec = new RecommendSystem('DBbase');
+
+        $rec_list = $rec->Recommend();
+        $rec_product = array(); // remember this is an associative array
+        foreach($rec_list as $key => $ID) {
+            $resource = $prd->SelectProductByID($ID);
+            $rec_product_list[] = $resource->fetch_assoc();
         }
 
         include '../view/single-product.php';
