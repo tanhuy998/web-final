@@ -173,15 +173,15 @@
         }
     }
 
-    $rcmd = new RecommendSystem('DBbase');
-    $track = new Tracker();
-    $track->Add(7);
-    echo $rcmd->Mode();
+    // $rcmd = new RecommendSystem('DBbase');
+    // $track = new Tracker();
+    // $track->Add(7);
+    // echo $rcmd->Mode();
 
-    $arr = $rcmd->Recommend();
-    echo '<br>';
-    echo 'recommend product (ID): ';
-    foreach($arr as $id) {
-        echo $id.' ';
-    }
+    // $arr = $rcmd->Recommend();
+    // echo '<br>';
+    // echo 'recommend product (ID): ';
+    // foreach($arr as $id) {
+    //     echo $id.' ';
+    // }
 ?>
