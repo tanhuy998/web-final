@@ -12,6 +12,8 @@
     require_once 'Analysis.php';
     require_once 'Tracking.php';
     require_once '../model/M_Database.php';
+
+
     /*
         define the RecommendSystem class
      */
@@ -91,22 +93,38 @@
             $result = array();
 
             if (count($recommend_list) > 0) {
+                // with each 3 most visited product, we will get 6 product for recommend
                 foreach ($recommend_list as $id) {
 
-                    $sql = "SELECT * FROM product_similar WHERE product_similar.IDSANPHAM1 = '$id' OR product_similar.IDSANPHAM2 = '$id' ORDER BY product_similar.DISTANCE DESC";
+                    $sql = "SELECT * FROM product_similar WHERE product_similar.IDSANPHAM1 = '$id' OR product_similar.IDSANPHAM2 = '$id' ORDER BY product_similar.DISTANCE LIMIT 5";
                     $resource = $db->SelectData($sql);
+                    
+                    $first_five = array();
+        
+                        echo 1;
+                    // get 5 most similar to a most visit product 
 
                     if ($resource->num_rows > 0) {
-                        echo 1;
-                        for ($i = 0; $i<2; ++$i) {
-                            $row = $resource->fetch_assoc();
-
+                        while ($row = $resource->fetch_assoc()) {
                             if ($id == $row['IDSANPHAM1']) {
-                                $result[] = $row['IDSANPHAM2'];
+                                $first_five[] = $row['IDSANPHAM2'];
                             }
                             else {
-                                $result[] = $row['IDSANPHAM1'];
+                                $first_five[] = $row['IDSANPHAM1'];
                             }
+                        }
+
+                        $random_index1 = mt_rand(0,$resource->num_rows-1);
+
+                        $result[] = $first_five[$random_index1];
+                        echo 4;
+                        if ($resource->num_rows >1) {
+                            $random_index2 = mt_rand(0,$resource->num_rows-1);
+                            while ($random_index2 == $random_index1) {
+                                echo 3;
+                                $random_index2 = mt_rand(0,$resource->num_rows-1);
+                            }
+                            $result[] = $first_five[$random_index2];
                         }
                     }
                 }
