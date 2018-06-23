@@ -35,6 +35,7 @@
 
         $GLOBALS['cart-qty'] = $quantity;
         $GLOBALS['cart-total'] = $total;
+        echo 'process';
     }
 
 ?>

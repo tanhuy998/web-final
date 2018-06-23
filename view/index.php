@@ -1,19 +1,18 @@
 <?php
-    session_start();
-    require_once '../libs/Cart-process.php';
-    require_once '../libs/LoginStatus.php';
-    require_once '../libs/HashCode.php';
+    // session_start();
+    // require_once '../libs/Cart-process.php';
+    // require_once '../libs/LoginStatus.php';
     
-    $user = new LogIn();
-    $user->Start();
-    $_SESSION['user'] = $user;
-    if ( isset($_SESSION['user'])){
-        echo $user->IsAnonymous()?1:0;
-        echo ($user->GetInformation())? 1:0;
-        //echo $user->GetInformation()['TEN'];
-    }
-    //echo '<br>'.hashCode('user');
-    CartProcess();
+    // $user = new LogIn();
+    // $user->Start();
+    // $_SESSION['user'] = $user;
+    // if ( isset($_SESSION['user'])){
+    //     echo $user->IsAnonymous()?1:0;
+    //     echo ($user->GetInformation())? 1:0;
+    //     //echo $user->GetInformation()['TEN'];
+    // }
+    // //echo '<br>'.hashCode('user');
+    // CartProcess();
 ?>    
 
 <!DOCTYPE html>
@@ -65,11 +64,22 @@
                 <div class="col-md-8">
                     <div class="user-menu">
                         <ul>
-                            <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
-                            <!-- <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li> -->
-                            <li><a href="cart.html"><i class="fa fa-user"></i> My Cart</a></li>
-                            <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
-                            <li><a href="#"><i class="fa fa-user"></i> Login</a></li>
+                        <?php
+                            if ($_SESSION['user']->IsAdmin()) {
+                                echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> My Account</a></li>";
+                                echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> Quản lý thành viên</a></li>";
+                                echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> Quản lý Sản phẩm</a></li>";
+                                echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> Đăng xuất</a></li>";
+                            }
+                            else if ($_SESSION['user']->IsAnonymous()) {
+                                echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> Đăng nhập</a></li>";
+                                echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> Đăng kí</a></li>";
+                            }
+                            else {
+                                echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> My Account</a></li>";
+                                echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> Đăng xuất</a></li>";
+                            }
+                        ?>
                         </ul>
                     </div>
                 </div>
@@ -112,7 +122,7 @@
                 
                 <div class="col-sm-6">
                     <div class="shopping-item">
-                        <a href="cart.html">Giỏ hàng - <span class="cart-amunt"><?php echo $GLOBALS['cart-total'];?> VNĐ</span> <i class="fa fa-shopping-cart"></i> <span class="product-count"><?php echo $GLOBALS['cart-qty'];?></span></a>
+                        <a href="cart.html">Giỏ hàng - <span class="cart-amunt"><?php echo number_format($GLOBALS['cart-total']);?> VNĐ</span> <i class="fa fa-shopping-cart"></i> <span class="product-count"><?php echo $GLOBALS['cart-qty'];?></span></a>
                     </div>
                 </div>
             </div>

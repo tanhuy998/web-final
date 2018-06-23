@@ -111,7 +111,7 @@
                 </div> 
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="http://localhost/final/view/index.php">TRANG CHỦ</a></li>
+                        <li><a href="http://localhost/final/control/C_Index.php">TRANG CHỦ</a></li>
                         <li class="active" >
                             <div class="dropdown">
                                 <button class="dropbtn">SẢN PHẨM</button>

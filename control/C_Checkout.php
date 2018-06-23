@@ -1,8 +1,20 @@
 <?php
-    session_start();
     require_once '../model/M_Product.php';
     require_once '../libs/Cart-process.php';
     require_once '../recommend/Recommend.php';
+    require_once '../libs/LoginStatus.php';
+    session_start();
+
+    if ( !isset($_SESSION['user'])){
+        echo 'TA';
+        $user = new LogIn();
+        $user->Start();
+        $_SESSION['user'] = $user;
+        //echo $->IsAnonymous()?1:0;
+        //echo $user->GetInformation()['TEN'];
+    }
+    echo $_SESSION['user']->IsAnonymous();
+
 
     // calculate for the mini cart icon
     CartProcess();

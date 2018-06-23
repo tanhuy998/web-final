@@ -2,9 +2,9 @@
     require_once 'HashCode.php';
     require_once '../model/M_Database.php';
 
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }    
+    // if (session_status() == PHP_SESSION_NONE) {
+    //     session_start();
+    // }    
     /*
         requirement: just include this file when already start a session
      */
@@ -86,7 +86,7 @@
         }
     }
 
-    class Login {
+    class LogIn {
         private $id;
         private $permission;
         private $information;
@@ -194,13 +194,14 @@
 
         public function IsAdmin() {
             $permit = convert_uudecode($this->permission);
+            //echo $permit;
             return ($permit == 'admin');
         }
 
         public function IsAnonymous() {
             $permit = convert_uudecode($this->permission);
             //echo $permit;
-            echo $permit;
+            //echo $permit;
             return ($permit == 'anonymous');
         }
 
