@@ -1,6 +1,8 @@
 <?php
     require_once 'HashCode.php';
     require_once '../model/M_Database.php';
+    require_once '../model/M_Bill.php';
+    require_once '../libs/Cart.php';
 
     // if (session_status() == PHP_SESSION_NONE) {
     //     session_start();
@@ -87,8 +89,8 @@
     }
 
     class LogIn {
-        private $id;
-        private $permission;
+        private $id; // property is encoded
+        private $permission; // property is encoded
         private $information;
 
         public function __construct() {
@@ -271,6 +273,24 @@
             $this->id = AccessToken::GetID($token);
             $this->permission = convert_uuencode('anonymous');
         }
+
+
+        public function PlaceOrder($_adress) {
+            // an associative array of products
+            $cart_list = GetCartList();
+
+            $user_id = convert_uudecode($this->id);
+
+            $bill = new Bill($user_id, $cart_list, $_adress);
+            
+            if ($bill->Place()) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
     }
 
     

@@ -15,21 +15,21 @@
 
         public function InsertData($sql) {
             $result = $this->connection->ExecuteQuery($sql);
-            if ($result === TRUE) {
-                return TRUE;
+            if ($result === true) {
+                return true;
             }
             else {
-                return FALSE;
+                return false;
             }
         }
 
         public function DeleteData($sql) {
             $result = $this->connection->ExecuteQuery($sql);
-            if ($result === TRUE) {
-                return TRUE;
+            if ($result === true) {
+                return true;
             }
             else {
-                return FALSE;
+                return false;
             }
         }
 
