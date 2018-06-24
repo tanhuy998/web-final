@@ -69,7 +69,7 @@
                                 echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> My Account</a></li>";
                                 echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> Quản lý thành viên</a></li>";
                                 echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> Quản lý Sản phẩm</a></li>";
-                                echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> Đăng xuất</a></li>";
+                                echo "<li><a href=\"http://localhost/final/control/C_Logout.php\"><i class=\"fa fa-user\"></i> Đăng xuất</a></li>";
                             }
                             else if ($_SESSION['user']->IsAnonymous()) {
                                 echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> Đăng nhập</a></li>";
@@ -77,7 +77,7 @@
                             }
                             else {
                                 echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> My Account</a></li>";
-                                echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> Đăng xuất</a></li>";
+                                echo "<li><a href=\"http://localhost/final/control/C_Logout.php\"><i class=\"fa fa-user\"></i> Đăng xuất</a></li>";
                             }
                         ?>
                         </ul>

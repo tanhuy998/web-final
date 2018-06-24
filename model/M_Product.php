@@ -16,6 +16,15 @@
             return $result;
         }
 
+        public function SelectTop5NewProduct() {
+            $db = new Database();
+
+            $sql = 'SELECT * FROM product ORDER BY product.ID DESC LIMIT 5';
+
+            $result = $db->SelectData($sql);
+            return $result;
+        }
+
         public function SelectProductByTag($tag) {
             $db = new Database();
             //$tag = "\'".$tag."\'";

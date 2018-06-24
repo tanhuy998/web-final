@@ -39,11 +39,22 @@
                 <div class="col-md-8">
                     <div class="user-menu">
                         <ul>
-                            <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
-                            <!-- <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li> -->
-                            <li><a href="cart.html"><i class="fa fa-user"></i> My Cart</a></li>
-                            <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
-                            <li><a href="#"><i class="fa fa-user"></i> Login</a></li>
+                        <?php
+                            if ($_SESSION['user']->IsAdmin()) {
+                                echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> My Account</a></li>";
+                                echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> Quản lý thành viên</a></li>";
+                                echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> Quản lý Sản phẩm</a></li>";
+                                echo "<li><a href=\"http://localhost/final/control/C_Logout.php\"><i class=\"fa fa-user\"></i> Đăng xuất</a></li>";
+                            }
+                            else if ($_SESSION['user']->IsAnonymous()) {
+                                echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> Đăng nhập</a></li>";
+                                echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> Đăng kí</a></li>";
+                            }
+                            else {
+                                echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> My Account</a></li>";
+                                echo "<li><a href=\"http://localhost/final/control/C_Logout.php\"><i class=\"fa fa-user\"></i> Đăng xuất</a></li>";
+                            }
+                        ?>
                         </ul>
                     </div>
                 </div>
@@ -156,25 +167,30 @@
                     </div>
                     
                     <div class="single-sidebar">
-                        <h2 class="sidebar-title">Products</h2>
                         <?php
-                            foreach($rec_product_list as $rec_product) {
-                                echo '<div class="thubmnail-recent">';
-                                echo "<img src=\"img/product-thumb-1.jpg\" class=\"recent-thumb\" alt=\"\">";
-                                echo "<h2><a href=\"http://localhost/final/control/C_Single-Product.php?id=".$rec_product['ID']."\">".$rec_product['TENSANPHAM']."</a></h2>";
-                                echo "<div class=\"product-sidebar-price\"><ins>".$rec_product['GIA']." VNĐ</ins></div></div>";
+                            if (count($rec_product_list) > 0) {
+                                echo '<h2 class="sidebar-title">Sản phẩm đề xuất</h2>';
+
+                                foreach($rec_product_list as $rec_product) {
+                                    echo '<div class="thubmnail-recent">';
+                                    echo "<img src=\"img/product-thumb-1.jpg\" class=\"recent-thumb\" alt=\"\">";
+                                    echo "<h2><a href=\"http://localhost/final/control/C_Single-Product.php?id=".$rec_product['ID']."\">".$rec_product['TENSANPHAM']."</a></h2>";
+                                    echo "<div class=\"product-sidebar-price\"><ins>".$rec_product['GIA']." VNĐ</ins></div></div>";
+                                }
                             }
                         ?>
                     </div>
                     
                     <div class="single-sidebar">
-                        <h2 class="sidebar-title">Recent Posts</h2>
+                        <h2 class="sidebar-title">Sản phẩm mới</h2>
                         <ul>
-                            <li><a href="single-product.html">Sony Smart TV - 2015</a></li>
-                            <li><a href="single-product.html">Sony Smart TV - 2015</a></li>
-                            <li><a href="single-product.html">Sony Smart TV - 2015</a></li>
-                            <li><a href="single-product.html">Sony Smart TV - 2015</a></li>
-                            <li><a href="single-product.html">Sony Smart TV - 2015</a></li>
+                            <?php
+                                if ($new_product->num_rows > 0) {
+                                    while($row = $new_product->fetch_assoc()) {
+                                        echo '<li><a href="http://localhost/final/control/C_Single-Product.php?id='.$row['ID'].'">'.$row['TENSANPHAM'].'</a></li>';
+                                    }
+                                }
+                            ?>
                         </ul>
                     </div>
                 </div>
@@ -182,39 +198,29 @@
                 <div class="col-md-8">
                     <div class="product-content-right">
                         <div class="woocommerce">
-                            <div class="woocommerce-info">Returning customer? <a class="showlogin" data-toggle="collapse" href="#login-form-wrap" aria-expanded="false" aria-controls="login-form-wrap">Click here to login</a>
-                            </div>
-
-                            <form id="login-form-wrap" class="login collapse" method="post">
-
-
-                                <p>If you have shopped with us before, please enter your details in the boxes below. If you are a new customer please proceed to the Billing &amp; Shipping section.</p>
-
-                                <p class="form-row form-row-first">
-                                    <label for="username">Username or email <span class="required">*</span>
-                                    </label>
-                                    <input type="text" id="username" name="username" class="input-text">
-                                </p>
-                                <p class="form-row form-row-last">
-                                    <label for="password">Password <span class="required">*</span>
-                                    </label>
-                                    <input type="password" id="password" name="password" class="input-text">
-                                </p>
-                                <div class="clear"></div>
-
-
-                                <p class="form-row">
-                                    <input type="submit" value="Login" name="login" class="button">
-                                    <label class="inline" for="rememberme"><input type="checkbox" value="forever" id="rememberme" name="rememberme"> Remember me </label>
-                                </p>
-                                <p class="lost_password">
+                            
+                            <?php
+                                if ($_SESSION['user']->IsAnonymous()) {
+                                    echo '<div class="woocommerce-info">Nếu bạn đã có tài khoản <a class="showlogin" data-toggle="collapse" href="#login-form-wrap" aria-expanded="false" aria-controls="login-form-wrap">Bấm để đăng nhập</a></div>';
+                                    echo '<form id="login-form-wrap" class="login collapse" method="post" action="http://localhost/final/control/C_Login.php">';
+                                    echo '<p class="form-row form-row-first">';
+                                    echo '<label for="username">Tài khoản <span class="required">*</span></label>';
+                                    echo '<input type="text" id="username" name="username" class="input-text"></p>';
+                                    echo '<p class="form-row form-row-last">';
+                                    echo '<label for="password">Mật khẩu <span class="required">*</span></label>';
+                                    echo '<input type="password" id="password" name="password" class="input-text"></p>';
+                                    echo '<div class="clear"></div>';
+                                    echo '<p class="form-row"><input type="submit" value="Đăng nhập" name="login" class="button">';
+                                    echo '<label class="inline" for="rememberme"><input type="checkbox" value="forever" id="rememberme" name="remember">Ghi nhớ tài khoản </label></p>';
+                                    echo '<div class="clear"></div></form>';
+                                }
+                            ?>
+                                <!-- <p class="lost_password">
                                     <a href="#">Lost your password?</a>
-                                </p>
+                                </p> -->
 
-                                <div class="clear"></div>
-                            </form>
-
-                            <div class="woocommerce-info">Have a coupon? <a class="showcoupon" data-toggle="collapse" href="#coupon-collapse-wrap" aria-expanded="false" aria-controls="coupon-collapse-wrap">Click here to enter your code</a>
+        
+                            <!-- <div class="woocommerce-info">Have a coupon? <a class="showcoupon" data-toggle="collapse" href="#coupon-collapse-wrap" aria-expanded="false" aria-controls="coupon-collapse-wrap">Click here to enter your code</a>
                             </div>
 
                             <form id="coupon-collapse-wrap" method="post" class="checkout_coupon collapse">
@@ -228,67 +234,40 @@
                                 </p>
 
                                 <div class="clear"></div>
-                            </form>
+                            </form> -->
 
-                            <form enctype="multipart/form-data" action="#" class="checkout" method="post" name="checkout">
+                            <form enctype="multipart/form-data" action="http://localhost/final/control/C_Checkout-Process.php" class="checkout" method="post" name="checkout">
 
                                 <div id="customer_details" class="col2-set">
                                     <div class="col-1">
                                         <div class="woocommerce-billing-fields">
-                                            <h3>Billing Details</h3>
-                                            <p id="billing_country_field" class="form-row form-row-wide address-field update_totals_on_change validate-required woocommerce-validated">
-                                                <label class="" for="billing_country">Country <abbr title="required" class="required">*</abbr>
-                                                </label>
-                                                <select class="country_to_state country_select" id="billing_country" name="billing_country">
-                                                    <option value="">Select a country…</option>
-                                                    <option value="AX">Åland Islands</option>
-                                                    
-                                                </select>
-                                            </p>
-
+                                            <h3>Thông tin mua hàng</h3>
                                             <p id="billing_first_name_field" class="form-row form-row-first validate-required">
-                                                <label class="" for="billing_first_name">First Name <abbr title="required" class="required">*</abbr>
+                                                <label class="" for="billing_first_name">Tên <abbr title="required" class="required">*</abbr>
                                                 </label>
                                                 <input type="text" value="" placeholder="" id="billing_first_name" name="billing_first_name" class="input-text ">
                                             </p>
 
                                             <p id="billing_last_name_field" class="form-row form-row-last validate-required">
-                                                <label class="" for="billing_last_name">Last Name <abbr title="required" class="required">*</abbr>
+                                                <label class="" for="billing_last_name">Họ <abbr title="required" class="required">*</abbr>
                                                 </label>
                                                 <input type="text" value="" placeholder="" id="billing_last_name" name="billing_last_name" class="input-text ">
                                             </p>
                                             <div class="clear"></div>
 
                                             <p id="billing_address_1_field" class="form-row form-row-wide address-field validate-required">
-                                                <label class="" for="billing_address_1">Address <abbr title="required" class="required">*</abbr>
+                                                <label class="" for="billing_address_1">Địa chỉ <abbr title="required" class="required">*</abbr>
                                                 </label>
-                                                <input type="text" value="" placeholder="Street address" id="billing_address_1" name="billing_address_1" class="input-text ">
+                                                <input type="text" value="" placeholder="Street address" id="billing_address_1" name="billing_address" class="input-text ">
                                             </p>
-
-                                            <p id="billing_state_field" class="form-row form-row-first address-field validate-state" data-o_class="form-row form-row-first address-field validate-state">
-                                                <label class="" for="billing_state">County</label>
-                                                <input type="text" id="billing_state" name="billing_state" placeholder="State / County" value="" class="input-text ">
-                                            </p>
-
                                             <div class="clear"></div>
 
                                             <p id="billing_phone_field" class="form-row form-row-last validate-required validate-phone">
-                                                <label class="" for="billing_phone">Phone <abbr title="required" class="required">*</abbr>
+                                                <label class="" for="billing_phone">Số điện thoại <abbr title="required" class="required">*</abbr>
                                                 </label>
                                                 <input type="text" value="" placeholder="" id="billing_phone" name="billing_phone" class="input-text ">
                                             </p>
                                             <div class="clear"></div>
-
-
-                                            <div class="create-account">
-                                                <p>Create an account by entering the information below. If you are a returning customer please login at the top of the page.</p>
-                                                <p id="account_password_field" class="form-row validate-required">
-                                                    <label class="" for="account_password">Account password <abbr title="required" class="required">*</abbr>
-                                                    </label>
-                                                    <input type="password" value="" placeholder="Password" id="account_password" name="account_password" class="input-text">
-                                                </p>
-                                                <div class="clear"></div>
-                                            </div>
 
                                         </div>
                                     </div>
@@ -346,7 +325,7 @@
 
 
                                     <div id="payment">
-                                        <ul class="payment_methods methods">
+                                        <!-- <ul class="payment_methods methods">
                                             <li class="payment_method_bacs">
                                                 <input type="radio" data-order_button_text="" checked="checked" value="bacs" name="payment_method" class="input-radio" id="payment_method_bacs">
                                                 <label for="payment_method_bacs">Direct Bank Transfer </label>
@@ -369,12 +348,11 @@
                                                     <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
                                                 </div>
                                             </li>
-                                        </ul>
+                                        </ul> -->
 
                                         <div class="form-row place-order">
 
                                             <input type="submit" data-value="Place order" value="Place order" id="place_order" name="woocommerce_checkout_place_order" class="button alt">
-
 
                                         </div>
 

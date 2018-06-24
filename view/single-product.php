@@ -39,11 +39,22 @@
                 <div class="col-md-8">
                     <div class="user-menu">
                         <ul>
-                            <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
-                            <!-- <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li> -->
-                            <li><a href="cart.html"><i class="fa fa-user"></i> My Cart</a></li>
-                            <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
-                            <li><a href="#"><i class="fa fa-user"></i> Login</a></li>
+                        <?php
+                            if ($_SESSION['user']->IsAdmin()) {
+                                echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> My Account</a></li>";
+                                echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> Quản lý thành viên</a></li>";
+                                echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> Quản lý Sản phẩm</a></li>";
+                                echo "<li><a href=\"http://localhost/final/control/C_Logout.php\"><i class=\"fa fa-user\"></i> Đăng xuất</a></li>";
+                            }
+                            else if ($_SESSION['user']->IsAnonymous()) {
+                                echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> Đăng nhập</a></li>";
+                                echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> Đăng kí</a></li>";
+                            }
+                            else {
+                                echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> My Account</a></li>";
+                                echo "<li><a href=\"http://localhost/final/control/C_Logout.php\"><i class=\"fa fa-user\"></i> Đăng xuất</a></li>";
+                            }
+                        ?>
                         </ul>
                     </div>
                 </div>
@@ -156,25 +167,30 @@
                     </div>
                     
                     <div class="single-sidebar">
-                        <h2 class="sidebar-title">Sản phẩm đề xuất</h2>
                         <?php
-                            foreach($rec_product_list as $rec_product) {
-                                echo '<div class="thubmnail-recent">';
-                                echo "<img src=\"img/product-thumb-1.jpg\" class=\"recent-thumb\" alt=\"\">";
-                                echo "<h2><a href=\"http://localhost/final/control/C_Single-Product.php?id=".$rec_product['ID']."\">".$rec_product['TENSANPHAM']."</a></h2>";
-                                echo "<div class=\"product-sidebar-price\"><ins>".$rec_product['GIA']." VNĐ</ins></div></div>";
+                            if (count($rec_product_list) > 0) {
+                                echo '<h2 class="sidebar-title">Sản phẩm đề xuất</h2>';
+
+                                foreach($rec_product_list as $rec_product) {
+                                    echo '<div class="thubmnail-recent">';
+                                    echo "<img src=\"img/product-thumb-1.jpg\" class=\"recent-thumb\" alt=\"\">";
+                                    echo "<h2><a href=\"http://localhost/final/control/C_Single-Product.php?id=".$rec_product['ID']."\">".$rec_product['TENSANPHAM']."</a></h2>";
+                                    echo "<div class=\"product-sidebar-price\"><ins>".$rec_product['GIA']." VNĐ</ins></div></div>";
+                                }
                             }
                         ?>
                     </div>
 
                     <div class="single-sidebar">
-                        <h2 class="sidebar-title">Recent Posts</h2>
+                        <h2 class="sidebar-title">Sản phẩm mới</h2>
                         <ul>
-                            <li><a href="">Sony Smart TV - 2015</a></li>
-                            <li><a href="">Sony Smart TV - 2015</a></li>
-                            <li><a href="">Sony Smart TV - 2015</a></li>
-                            <li><a href="">Sony Smart TV - 2015</a></li>
-                            <li><a href="">Sony Smart TV - 2015</a></li>
+                            <?php
+                                if ($new_product->num_rows > 0) {
+                                    while($row = $new_product->fetch_assoc()) {
+                                        echo '<li><a href="http://localhost/final/control/C_Single-Product.php?id='.$row['ID'].'">'.$row['TENSANPHAM'].'</a></li>';
+                                    }
+                                }
+                            ?>
                         </ul>
                     </div>
                 </div>
