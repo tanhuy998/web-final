@@ -1,5 +1,5 @@
 <?php
-    require 'M_Server_Connect.php';
+    require_once 'M_Server_Connect.php';
 
     class Database {
         private $connection;

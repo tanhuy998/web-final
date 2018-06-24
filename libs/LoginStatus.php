@@ -1,6 +1,7 @@
 <?php
     require_once 'HashCode.php';
     require_once '../model/M_Database.php';
+    require_once '../model/M_Product.php';
     require_once '../model/M_Bill.php';
     require_once '../libs/Cart.php';
 
@@ -85,6 +86,12 @@
                 return false;
             }
 
+        }
+    }
+
+    class IsNotUserException extends Exception {
+        public function __construc() {
+            parent::__construct("You haven't loged in yet!",0);
         }
     }
 
@@ -291,6 +298,47 @@
             }
         }
 
+        public function Commented($_product_id) {
+            $db = new Datanbase();
+
+            $userID = convert_uudecode($this->id);
+
+            $sql = "SELECT * FROM product_comment WHERE product_comment.ID = '$_product_id' AND product_comment.IDTAIKHOAN = '$user_id'";
+
+            $result = $db->SelectData($sql);
+            echo 'something';
+            if ($result->num_rows > 0) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        public function LeaveComment($_pID, string $_content) {
+
+            if (!$this->IsAnonymous()) {
+
+                if ($_content != '') {
+                    $prd = new Product();
+
+                    $userID = convert_uudecode($this->id);
+
+                    if ($prd->InsertComment($userID, $_pID, $_content)){
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                }
+                else {
+                    return false;
+                }
+            }
+            else {
+                throw new IsNotUserException();
+            }
+        }
     }
 
     

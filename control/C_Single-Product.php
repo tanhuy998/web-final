@@ -54,6 +54,9 @@
             $product = $product_resource->fetch_assoc();
         }
 
+        $reviews_resource = $prd->SelectCommentByProductID($product['ID']);
+
+
         $prd = new Product();
         $new_product = $prd->SelectTop5NewProduct();
 

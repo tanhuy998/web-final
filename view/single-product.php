@@ -222,6 +222,11 @@
                             
                             <div class="col-sm-6">
                                 <div class="product-inner">
+									<?php
+										if (isset($_GET['rev-error'])) {
+											echo '<p><font color="red">*Bạn không thể để lại đánh giá khi bỏ trống ô đánh giá!</font></p>';
+										}
+									?>
                                     <h2 class="product-name"><?php echo $product['TENSANPHAM'];?></h2>
                                     <div class="product-inner-price">
                                         <ins><?php echo $product['GIA']?> VNĐ</ins>
@@ -245,7 +250,7 @@
                                                         $tagCount += 1;
                                                         $char = ($tagCount === $product_tag_resource->num_rows )? "":", ";
                                                         
-                                                        echo "<a href=\"http://localhost/final/control/C_product.php?category=".$row['TENTAG']."\">".$row['TENTAG'].$char."</a>";
+                                                        echo "<a href=\"http://localhost/final/control/C_product.php?category=".$row['TENTAG']."&page=1\">".$row['TENTAG'].$char."</a>";
                                                     }
                                                 }
                                             ?>
@@ -274,24 +279,32 @@
 
                                             </div>
                                             <div role="tabpanel" class="tab-pane fade" id="profile">
-                                                <h2>Reviews</h2>
-                                                <div class="submit-review">
-                                                    <p><label for="name">Name</label> <input name="name" type="text"></p>
-                                                    <p><label for="email">Email</label> <input name="email" type="email"></p>
-                                                    <div class="rating-chooser">
-                                                        <p>Your rating</p>
+                                                <?php
+                                                    if (!$_SESSION['user']->IsAnonymous()) {
 
-                                                        <div class="rating-wrap-post">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                        </div>
-                                                    </div>
-                                                    <p><label for="review">Your review</label> <textarea name="review" id="" cols="30" rows="10"></textarea></p>
-                                                    <p><input type="submit" value="Submit"></p>
-                                                </div>
+														//if (!$_SESSION['user']->Commented($product['ID'])) {
+															echo '<h2>Đánh giá của bạn</h2>';
+                                                        	echo '<div class="submit-review"><form action="http://localhost/final/control/C_Review-Process.php?id='.$product['ID'].'" method="post">';
+                                                        	echo '<p><textarea name="review" id="" cols="30" rows="10"></textarea></p>';
+                                                        	echo '<p><input type="submit" value="Gửi"></p></form></div>';
+														// }
+														// else {
+														//  	echo '<p><label>*Bạn đã đánh giá cho sản phẩm này</label></p>';
+														// }
+                                                    }
+                                                ?> 
+
+                                                <?php
+												echo '<h2>Đánh giá khác</h2>';
+												echo '<hr>';
+													if ($reviews_resource->num_rows > 0) {
+														while ($row = $reviews_resource->fetch_assoc()) {
+															// echo '<div class="submit-review">';
+															echo '<p><label for="review">'.$row['TEN'].': </label> '.$row['NOIDUNG'].'</p><hr>';
+															// echo '</div>';
+														}
+													}
+                                                ?>
                                             </div>
                                         </div>
                                     </div>

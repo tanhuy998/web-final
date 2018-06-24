@@ -1,5 +1,5 @@
 <?php
-    require 'M_Database.php';
+    require_once 'M_Database.php';
 
     class Product {
 
@@ -110,5 +110,29 @@
             $result = $db->SelectData($sql);
             return $result;
         }
+
+        public function InsertComment($_uID, $_pID, string $_content) {
+             $db = new Database();
+
+             $sql = "INSERT INTO product_comment (IDSANPHAM, IDTAIKHOAN, NOIDUNG, DANHGIA) VALUES ('$_pID', '$_uID', '$_content', '4')";
+
+             if ($db->InsertData($sql)) {
+                return true;
+             }
+             else {
+                 return false;
+             }
+        }
+
+        public function SelectCommentByProductID($_pID) {
+            $db = new Database();
+
+            $sql = "SELECT product_comment.ID, product_comment.IDSANPHAM, product_comment.IDTAIKHOAN, product_comment.NOIDUNG, product_comment.DANHGIA, account_information.TEN FROM product_comment join account_information ON account_information.IDTAIKHOAN = product_comment.IDTAIKHOAN WHERE IDSANPHAM = '$_pID' ORDER BY product_comment.ID DESC";
+
+            $result = $db->SelectData($sql);
+
+            return $result;
+        }
+
     }
 ?>`
