@@ -73,7 +73,7 @@
                             }
                             else if ($_SESSION['user']->IsAnonymous()) {
                                 echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> Đăng nhập</a></li>";
-                                echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> Đăng kí</a></li>";
+                                echo "<li><a href=\"http://localhost/final/control/C_Register.php\"><i class=\"fa fa-user\"></i> Đăng kí</a></li>";
                             }
                             else {
                                 echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> My Account</a></li>";
