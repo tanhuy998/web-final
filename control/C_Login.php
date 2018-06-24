@@ -12,16 +12,16 @@
         $_SESSION['user'] = $user;
 
         if ($_SESSION['user']->IsAnonymous()) {
-            // header('Location: http://localhost/final/control/C_Checkout.php?log-err=1');
-            // exit;
+            header('Location: http://localhost/final/control/C_Checkout.php?log-err=1');
+            exit;
         }
         else {
-            // header('Location: http://localhost/final/control/C_Checkout.php');
-            // exit;
+            header('Location: http://localhost/final/control/C_Checkout.php');
+            exit;
         }
     }
     else {
-        // header('Location: http://localhost/final/control/C_Checkout.php?log-err=1');
-        // exit;
+        header('Location: http://localhost/final/control/C_Checkout.php?log-err=1');
+        exit;
     }
 ?>
