@@ -18,7 +18,7 @@ function hashCode($str) {
  ?>
 <?php 
 
-    include("../model/connect.php");
+    include_once("../model/connect.php");
   	if (isset($_POST['submit'])){
 	/********************Start lấy thông tin form**************************************************************/
         $name = $_POST['name'];
@@ -36,44 +36,35 @@ function hashCode($str) {
 
 
     /*************************start Kiểm tra thông tin tài khoản*************************************************/
-        $back = $_SERVER['HTTP_REFERER']; //URL trước đó 
-
-        if (!$name || !$ngsinh || !$diachi || !$gmail || !$sdt || !$tentaikhoan || !$matkhau)
-        {
-            echo "Vui lòng nhập đầy đủ thông tin. <a href='$back'>Trở lại</a>";
-            exit;
-        }
-
-        if (!intval($sdt    )) {
-            echo "Số điện thoại không được phép có ký tự. <a href='$back'>Trở lại</a>";
-            exit;
-        }
-
+    if (!$name || !$ngsinh || !$diachi || !$gmail || !$sdt || !$tentaikhoan || !$matkhau)
+    {
+        echo "Vui lòng nhập đầy đủ thông tin. <a href='http://localhost/final/view/add_user.php/'>Trở lại</a>";
+        exit;
+    }
         $sql = "SELECT TAIKHOAN FROM account WHERE '$tentaikhoan'= TAIKHOAN ";
 	    $ketqua = $connect->query($sql);
-        $row = mysqli_fetch_assoc($ketqua);
-        
+	    $row = mysqli_fetch_assoc($ketqua);
 	
-        if($row['TAIKHOAN']){
-    	    echo "Tên đăng nhập này đã có người dùng. Vui lòng chọn tên đăng nhập khác. <a href='$back'>Trở lại</a>";
-            exit;
-        }
+    if($row['TAIKHOAN']){
+    	echo "Tên đăng nhập này đã có người dùng. Vui lòng chọn tên đăng nhập khác. <a href='http://localhost/final/view/add_user.php/'>Trở lại</a>";
+        exit;
+    }
         $sql = "SELECT EMAIL FROM account_information WHERE '$gmail'= EMAIL ";
 	    $ketqua = $connect->query($sql);
 	    $row = mysqli_fetch_assoc($ketqua);
 	
-        if($row['EMAIL']){
-    	    echo "Email đã được sử dụng, vui lòng nhập email khác ! cảm ơn!. <a href='$back'>Trở lại</a>";
-            exit;
-        }
+    if($row['EMAIL']){
+    	echo "Gmail đã được sử dụng, vui lòng nhập gmail khác ! cảm ơn!. <a href='http://localhost/final/view/add_user.php/'>Trở lại</a>";
+        exit;
+    }
         $sql = "SELECT SDT FROM account_information WHERE '$sdt'= SDT ";
 	    $ketqua = $connect->query($sql);
 	    $row = mysqli_fetch_assoc($ketqua);
 	
-        if($row['SDT']){
-    	    echo "Số điện thoại đã được sử dụng, vui lòng nhập số điện thoại khác ! cảm ơn!. <a href='$back'>Trở lại</a>";
-            exit;
-        }
+    if($row['SDT']){
+    	echo "Số điện thoại đã được sử dụng, vui lòng nhập số điện thoại khác ! cảm ơn!. <a href='http://localhost/final/view/add_user.php/'>Trở lại</a>";
+        exit;
+    }
     /*************************end Kiểm tra thông tin tài khoản*************************************************/
 
 
@@ -92,7 +83,9 @@ function hashCode($str) {
     
     }
    	/********************End tương tác Database*****************************************************************/
-    
-    header("Location: http://localhost/final/control/C_Index.php");
-    exit;
+   
+   
+   
  ?>
+ <p>Thêm thành công!</p>
+<a href="http://localhost/final/view/thanhvien.php/">trở lại</a>

@@ -1,5 +1,5 @@
 <?php
-    require_once '../model/M_Database.php';
+    //require_once '../model/M_Database.php';
 
     function hashCode($str) {
         $str = (string)$str;

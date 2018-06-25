@@ -90,7 +90,7 @@
     }
 
     class IsNotUserException extends Exception {
-        public function __construc() {
+        public function __construct() {
             parent::__construct("You haven't loged in yet!",0);
         }
     }
@@ -350,6 +350,4 @@
             }
         }
     }
-
-    
 ?>
