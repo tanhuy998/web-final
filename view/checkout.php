@@ -202,7 +202,7 @@
                             <?php
                                 if ($_SESSION['user']->IsAnonymous()) {
                                     echo '<div class="woocommerce-info">Nếu bạn đã có tài khoản <a class="showlogin" data-toggle="collapse" href="#login-form-wrap" aria-expanded="false" aria-controls="login-form-wrap">Bấm để đăng nhập</a></div>';
-                                    echo '<form id="login-form-wrap" class="login collapse" method="post" action="http://localhost/final/control/C_Login-Process.php">';
+                                    echo '<form id="login-form-wrap" name="login" class="login collapse" method="post" action="http://localhost/final/control/C_Login-Process.php">';
                                     echo '<p class="form-row form-row-first">';
                                     echo '<label for="username">Tài khoản <span class="required">*</span></label>';
                                     echo '<input type="text" id="username" name="username" class="input-text"></p>';
@@ -210,7 +210,7 @@
                                     echo '<label for="password">Mật khẩu <span class="required">*</span></label>';
                                     echo '<input type="password" id="password" name="password" class="input-text"></p>';
                                     echo '<div class="clear"></div>';
-                                    echo '<p class="form-row"><input type="submit" value="Đăng nhập" name="login" class="button">';
+                                    echo '<p class="form-row"><input type="submit" value="Đăng nhập" class="button">';
                                     echo '<label class="inline" for="rememberme"><input type="checkbox" value="forever" id="rememberme" name="remember">Ghi nhớ tài khoản </label></p>';
                                     echo '<div class="clear"></div></form>';
                                 }

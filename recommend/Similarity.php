@@ -18,6 +18,7 @@
         */
         private $properties_array;
         private $properties_assoc;
+        private $price;
         private $primaryTag;
         private $id;
 
@@ -28,6 +29,8 @@
 
             $prd = new Product();
             $tag_resource = $prd->SelectProductTagByProductID($_id);
+
+
 
             if ($tag_resource->num_rows > 0) {
                 while ($row = $tag_resource->fetch_assoc()) {
@@ -43,6 +46,13 @@
                     // set true just because boolean is the cheapest type :v
                     $this->properties_assoc[$tagName] = true;
                 }
+            }
+
+            $product_resource = $prd->SelectProductByID($_id);
+
+            if ($product_resource->num_rows > 0) {
+                $row = $product_resource->fetch_assoc();
+                $this->price = $row['GIA'];
             }
         }
 
@@ -87,18 +97,46 @@
 
         // check for existence of product's single property
         // return true if product has the specified property and false for the rest
-        public function ExistProperty(string $_property) {
+        public function ExistProperty(string $_property): bool {
             return (isset($this->properties_assoc["$_property"]));
         }
 
         // get all properties of product method
         // return a list of property as an numeric array
-        public function Properties() {
+        public function Properties(): array {
             return $this->properties_array;
         }
 
-        public function Count() {
+        public function Count(): int {
             return count($this->properties_array);
         }
     }
+
+
+    // $product1 = new ProductProperty(3);
+    // $product2 = new ProductProperty(4);
+
+            
+    // $totalDistance = $product1->Count() + $product2->Count() + 6;
+    // echo $totalDistance.'<br>';
+            
+    // if ($product1->PrimaryProperty() === $product2->PrimaryProperty()) {
+    //     $totalDistance -= 8;
+    // }
+    // echo $totalDistance.'<br> <br>';
+            
+    // $product1_properties = $product1->Properties();
+            
+    // foreach($product1_properties as $current_pr) {
+
+    //     if ($current_pr != $product1->PrimaryProperty()) {
+                    
+    //         if ($product2->ExistProperty($current_pr)) {
+    //             echo 'e';
+    //             $totalDistance -= 2;
+    //         }
+    //     }
+    // }
+    
+    // echo 'total: '.$totalDistance;
 ?>

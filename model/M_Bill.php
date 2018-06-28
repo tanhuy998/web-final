@@ -21,8 +21,13 @@
         //      order_list has foreign key references to bill 
         //      the relation ship of two tables is 1 - n (bill - order_list)
         public function Place() {
+            // if this object hasn't been placed to database yet
             if ($this->placed === false) {
                 $this->placed = true;
+
+                if (count($list) == 0) {
+                    return false;
+                }
 
                 $userID = $this->user_id;
                 $_adress = $this->adress;
@@ -72,6 +77,8 @@
                                 return false;
                             }
                         }
+
+                        return true;
                     }
                     else { // #1-1 else when there no return bill ID
                         return false;
@@ -80,7 +87,7 @@
                 else { #1 else when the insertion of bill record is failed
                     return false;
                 }
-            }
+            }   // if this object has been placed to database
             else {
                 return false;
             }

@@ -66,7 +66,7 @@
 
         // method return the visit_list after sort by descending order arccording to value
         // the visit_list array is associative array with key is the id of product and value is the time that user visit that product
-        public function GetVisitList() {
+        public function GetVisitList(): array {
             arsort($this->visit_list);
 
             return $this->visit_list;

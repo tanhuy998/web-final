@@ -169,10 +169,10 @@
             indentifier here is the account and password
             when the login process is setted up successfully, this method will place an access token on client's cookie
         */
-        public function StartWithIdentifier($account,$pass,bool $_remember = false) {
+        public function StartWithIdentifier($account,$pass) {
             // password must be hash to in to query from database
             $pass = hashCode($pass);
-
+            echo $pass;
             $db = new Database();
 
             $sql = "SELECT account.ID,account.MATKHAU,account_type.LOAI FROM account INNER JOIN account_type ON account.LOAITK = account_type.ID WHERE account.TAIKHOAN = '$account' AND account.MATKHAU = '$pass'";
@@ -192,18 +192,18 @@
                 }
 
 
-                if ($_remember == true) {
-                    $token = AccessToken::Token($ID,$pass);
-                    echo 1;
-                    // place cookie of the user
-                    setcookie('token',$token, time() + (86400 *30),'/');
-                }
-                else {
-                    $token = AccessToken::AnonymousToken();
-                    echo convert_uudecode(AccessToken::GetID($token));
-                    // place cookie of the anonymous
-                    setcookie('token',$token, time() + (86400 *30),'/');
-                }
+                // if ($_remember == true) {
+                //     $token = AccessToken::Token($ID,$pass);
+                //     echo 1;
+                //     // place cookie of the user
+                //     setcookie('token',$token, time() + (86400 *30),'/');
+                // }
+                // else {
+                //     $token = AccessToken::AnonymousToken();
+                //     echo convert_uudecode(AccessToken::GetID($token));
+                //     // place cookie of the anonymous
+                //     setcookie('token',$token, time() + (86400 *30),'/');
+                // }
                 
             }
             else { // if account doesn't exist 
@@ -349,5 +349,7 @@
                 throw new IsNotUserException();
             }
         }
+
+        // mm
     }
 ?>

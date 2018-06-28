@@ -73,9 +73,12 @@
             $product1_properties = $product1->Properties();
             // the Properties method return list of a product properties
             foreach($product1_properties as $current_pr) {
-                
-                if ($product2->ExistProperty($current_pr)) {
-                    $totalDistance -= 2;
+
+                if ($current_pr != $product1->PrimaryProperty()) {
+
+                    if ($product2->ExistProperty($current_pr)) {
+                        $totalDistance -= 2;
+                    }
                 }
             }
 
