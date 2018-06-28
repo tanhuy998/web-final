@@ -41,17 +41,17 @@
                         <ul>
                         <?php
                             if ($_SESSION['user']->IsAdmin()) {
-                                echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> My Account</a></li>";
-                                echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> Quản lý thành viên</a></li>";
+                                echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i>".$_SESSION['user']->GetInformation()['TEN']."</a></li>";
+                                echo "<li><a href=\"http://localhost/final/view/thanhvien.php\"><i class=\"fa fa-user\"></i> Quản lý thành viên</a></li>";
                                 echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> Quản lý Sản phẩm</a></li>";
                                 echo "<li><a href=\"http://localhost/final/control/C_Logout.php\"><i class=\"fa fa-user\"></i> Đăng xuất</a></li>";
                             }
                             else if ($_SESSION['user']->IsAnonymous()) {
-                                echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> Đăng nhập</a></li>";
-                                echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> Đăng kí</a></li>";
+                                echo "<li><a href=\"http://localhost/final/control/C_Login.php\"><i class=\"fa fa-user\"></i> Đăng nhập</a></li>";
+                                echo "<li><a href=\"http://localhost/final/control/C_Register.php\"><i class=\"fa fa-user\"></i> Đăng kí</a></li>";
                             }
                             else {
-                                echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> My Account</a></li>";
+                                echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i>".$_SESSION['user']->GetInformation()['TEN']."</a></li>";
                                 echo "<li><a href=\"http://localhost/final/control/C_Logout.php\"><i class=\"fa fa-user\"></i> Đăng xuất</a></li>";
                             }
                         ?>

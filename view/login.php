@@ -47,11 +47,22 @@
                 <div class="col-md-8">
                     <div class="user-menu">
                         <ul>
-                            <li><a href="#"><i class="fa fa-user"></i> Tài khoản </a></li>
-                            <!-- <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li> -->
-                            <li><a href="cart.html"><i class="fa fa-user"></i> Giỏ hàng</a></li>
-                            <li><a href="checkout.html"><i class="fa fa-user"></i> Thanh toán</a></li>
-                            <li><a href="#"><i class="fa fa-user"></i> Đăng nhập</a></li>
+                            <?php
+                                if ($_SESSION['user']->IsAdmin()) {
+                                    echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i>".$_SESSION['user']->GetInformation()['TEN']."</a></li>";
+                                    echo "<li><a href=\"http://localhost/final/view/thanhvien.php\"><i class=\"fa fa-user\"></i> Quản lý thành viên</a></li>";
+                                    echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> Quản lý Sản phẩm</a></li>";
+                                    echo "<li><a href=\"http://localhost/final/control/C_Logout.php\"><i class=\"fa fa-user\"></i> Đăng xuất</a></li>";
+                                }
+                                else if ($_SESSION['user']->IsAnonymous()) {
+                                    echo "<li><a href=\"http://localhost/final/control/C_Login.php\"><i class=\"fa fa-user\"></i> Đăng nhập</a></li>";
+                                    echo "<li><a href=\"http://localhost/final/control/C_Register.php\"><i class=\"fa fa-user\"></i> Đăng kí</a></li>";
+                                }
+                                else {
+                                    echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i>".$_SESSION['user']->GetInformation()['TEN']."</a></li>";
+                                    echo "<li><a href=\"http://localhost/final/control/C_Logout.php\"><i class=\"fa fa-user\"></i> Đăng xuất</a></li>";
+                                }
+                            ?>
                         </ul>
                     </div>
                 </div>
@@ -165,7 +176,7 @@
 
                  <input type="submit" name="submit" value="Đăng Nhập" class="textbox">
             </form>
-            <a href="http://localhost:8888/web-test/dangkythanhvien.php ">Đăng Ký Mới</a>
+            <a href="http://localhost/final/control/C_Register.php ">Đăng Ký Mới</a>
         </div>
         abc
     </div>
