@@ -32,10 +32,11 @@
         //$category = (isset($_GET['category']))? $_GET['category']: "null";
 
         $product_resource = $prd->SelectProductByID($id);
+        echo 'id['.$id.']';
         $product_tag_resource = $prd->SelectProductTagByProductID($id);
         $product_image_resource = $prd->SelectProductImageByProductID($id);
         //$temp = $product_image_resource;
-        $Thumb_image;
+        $thumb_image;
         
 
         // get the first image from all images resourse of a product to be thumbnail image
@@ -44,7 +45,7 @@
         }
         // after fetch the first row in image resource for the thumbnail imag, the internal pointer is seeked to value 1(second)
         // then we seeked this resource agin to 0(first) for another fetching time to get all images
-        $product_image_resource->data_seek(0);
+        //$product_image_resource->data_seek(0);
 
 
         // get the product from product resourse get by sql command
@@ -52,6 +53,7 @@
         $product;
         if ($product_resource->num_rows > 0) {
             $product = $product_resource->fetch_assoc();
+            echo 'P['.$product['ID'].']';
         }
 
         $reviews_resource = $prd->SelectCommentByProductID($product['ID']);
@@ -66,6 +68,15 @@
         $rec_list = $rec->Recommend();
 
         $rec_product_list = GetRecommendProduct($rec_list); // remember this is an associative array
+        echo 'rec['.count($rec_list).']';
+        $rec_product_thumb = array();
+
+        foreach ($rec_product_list as $rec_product) {
+            $id = $rec_product['ID'];
+            $resource = $prd->SelectProductImageByProductID($id);
+
+            $rec_product_thumb["$id"] = $resource->fetch_assoc();
+        }
 
         include '../view/single-product.php';
     }

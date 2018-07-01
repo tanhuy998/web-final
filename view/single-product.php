@@ -172,8 +172,9 @@
                                 echo '<h2 class="sidebar-title">Sản phẩm đề xuất</h2>';
 
                                 foreach($rec_product_list as $rec_product) {
+                                    $id = $rec_product['ID'];
                                     echo '<div class="thubmnail-recent">';
-                                    echo "<img src=\"img/product-thumb-1.jpg\" class=\"recent-thumb\" alt=\"\">";
+                                    echo "<img src=\"../img/".$rec_product_thumb["$id"]['DUONGDAN']."\" class=\"recent-thumb\" alt=\"\">";
                                     echo "<h2><a href=\"http://localhost/final/control/C_Single-Product.php?id=".$rec_product['ID']."\">".$rec_product['TENSANPHAM']."</a></h2>";
                                     echo "<div class=\"product-sidebar-price\"><ins>".$rec_product['GIA']." VNĐ</ins></div></div>";
                                 }
@@ -205,7 +206,7 @@
                             <div class="col-sm-6">
                                 <div class="product-images">
                                     <div class="product-main-img">
-                                        <img src="<?php echo $thumb_image['DUONGDAN'];?>" alt="thumbnail">
+                                        <img src="<?php echo '../img/'.$thumb_image['DUONGDAN'];?>" alt="thumbnail">
                                     </div>
                                     
                                     <div class="product-gallery">

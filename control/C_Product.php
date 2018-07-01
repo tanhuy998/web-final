@@ -39,7 +39,7 @@
     $prd = new Product();
     $result = $prd->SelectProductByTagWithPage($type,intval($currentPage));
     //$result = $prd->SelectProductByTag($type);
-    $product_count = $prd->ProductCount();
+    $product_count = $prd->ProductCountByTag($type);
 
     //$temp1 = intval($result->num_rows / 8);
     //$temp2 = ($result->num_rows % 8) == 0? 0 : 1;
@@ -47,6 +47,6 @@
     $temp2 = intval($product_count % 8) == 0? 0: 1;
     
     $maxPage = $temp1 + $temp2;
-
+    echo $temp1;
     include '../view/shop.php';
 ?>

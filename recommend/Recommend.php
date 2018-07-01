@@ -92,13 +92,13 @@
         private function RecommendDBbaseMode() {
             $tracker = new Tracker();
             $recommend_list = $this->GetRecommendData($tracker);
-
+            echo 'list['.count($recommend_list).']';
             $result = array();
 
             if (count($recommend_list) > 0) {
                 // with each 3 most visited product, we will get 6 product for recommend (2 for each most visited product)
                 foreach ($recommend_list as $id) {
-                    echo 'T'.$id.'T';
+                    echo '['.$id.']';
                     $db = new Database();
                     $sql = "SELECT * FROM product_similar WHERE product_similar.IDSANPHAM1 = '$id' OR product_similar.IDSANPHAM2 = '$id' ORDER BY product_similar.DISTANCE LIMIT 5";
                     $resource = $db->SelectData($sql);
@@ -107,7 +107,7 @@
                     // it's lengh will depend on the data in the database but it's max length is 5
                     $first_five = array();
         
-                        echo 1;
+                    //    echo 1;
                     // get 5 most similar to a most visit product 
 
                     if ($resource->num_rows > 0) {
@@ -133,7 +133,8 @@
                                 $ID = $first_five[$random_index];
                                 $i = 0;
                                 // if the choosen product is not exist in the $result array, push the product to the $result array
-                                if (!isset($result["$ID"])) {   
+                                if (!isset($result["$ID"])) {
+                                    echo 'add';   
                                     $result["$ID"] = $ID;
                                 }
                                 else { // else there 5 chances to rechoose new similar product
@@ -160,7 +161,7 @@
                     }
                 }
             }
-            // echo 'ka'.count($result);
+            echo 'ka'.count($result);
             return $result;
         }
 

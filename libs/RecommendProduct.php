@@ -1,4 +1,6 @@
 <?php
+    require_once '../model/M_Product.php';
+
     function GetRecommendProduct(array $rec_list) {
         $prd = new Product();
 

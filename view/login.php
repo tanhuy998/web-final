@@ -178,7 +178,6 @@
             </form>
             <a href="http://localhost/final/control/C_Register.php ">Đăng Ký Mới</a>
         </div>
-        abc
     </div>
     <!-- End footer bottom area -->
 

@@ -179,7 +179,7 @@
                         echo "<div class=\"col-md-3 col-sm-6\">";
                         echo "<div class=\"single-shop-product\">";
                         echo    "<div class=\"product-upper\">";
-                        echo        "<a href=\"http://localhost/final/control/C_Single-product.php?id=".$row['ID']."&category=".$type."\"><img src=\"".$thumb['DUONGDAN']."\" alt=\"img\"></a>";
+                        echo        "<a href=\"http://localhost/final/control/C_Single-product.php?id=".$row['ID']."&category=".$type."\"><img src=\"".'../img/'.$thumb['DUONGDAN']."\" alt=\"img\"></a>";
                         echo   "</div>";
                         echo    "<h2><a href=\"http://localhost/final/control/C_Single-product.php?id=".$row['ID']."&category=".$type."\">".$row['TENSANPHAM']."</a></h2>";
                         echo    "<div class=\"product-carousel-price\">";
@@ -222,7 +222,7 @@
                         <nav>
                           <ul class="pagination">
                             <li>
-                              <a href="<?php if($currentPage != 1) { echo "<li><a href=\"http://localhost/final/control/C_Product.php?category=ao&page=".($currentPage - 1)."\">$i</a></li>";} else {echo "#";}?>" aria-label="Previous">
+                              <a href="<?php if($currentPage != 1) { echo "http://localhost/final/control/C_Product.php?category=ao&page=".($currentPage - 1);} else {echo "#";}?>" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                               </a>
                             </li>
@@ -232,7 +232,7 @@
                                 }
                             ?>
                             <li>
-                              <a href="<?php if($currentPage != $maxPage) { echo "<li><a href=\"http://localhost/final/control/C_Product.php?category=ao&page=".($currentPage + 1)."\">$i</a></li>";} else {echo "#";}?>" aria-label="Next">
+                              <a href="<?php if($currentPage != $maxPage) { echo "http://localhost/final/control/C_Product.php?category=ao&page=".($currentPage + 1);} else {echo "#";}?>" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
                               </a>
                             </li>

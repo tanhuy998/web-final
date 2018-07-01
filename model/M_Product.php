@@ -64,10 +64,10 @@
             }
         }
 
-        public function ProductCount() {
+        public function ProductCountByTag($tag) {
             $db = new Database();
 
-            $sql = 'SELECT COUNT(*) FROM product';
+            $sql = "SELECT COUNT(*) FROM product INNER JOIN product_tag ON product.ID = product_tag.IDSANPHAM WHERE product_tag.TENTAG = '$tag'";
 
             $resource = $db->SelectData($sql);
             $result = $resource->fetch_assoc();
