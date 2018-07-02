@@ -41,9 +41,13 @@
                         <ul>
                         <?php
                             if ($_SESSION['user']->IsAdmin()) {
-                                echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i>".$_SESSION['user']->GetInformation()['TEN']."</a></li>";
+                                echo "<li><a href=\"http://localhost/final/control/C_Personal_Info.php\"><i class=\"fa fa-user\"></i>".$_SESSION['user']->GetInformation()['TEN']."</a></li>";
                                 echo "<li><a href=\"http://localhost/final/view/thanhvien.php\"><i class=\"fa fa-user\"></i> Quản lý thành viên</a></li>";
-                                echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i> Quản lý Sản phẩm</a></li>";
+                                echo "<li><a href=\"http://localhost/final/Product/view/V_ViewProduct.php\"><i class=\"fa fa-user\"></i> Quản lý Sản phẩm</a></li>";
+                                echo "<li><a href=\"http://localhost/final/Product/view/V_InsertProduct.php\"><i class=\"fa fa-user\"></i> Thêm sản phẩm</a></li>";
+                                echo "<li><a href=\"http://localhost/final/view/order_list.php\"><i class=\"fa fa-user\"></i> Chi tiết hóa đơn</a></li>";
+
+
                                 echo "<li><a href=\"http://localhost/final/control/C_Logout.php\"><i class=\"fa fa-user\"></i> Đăng xuất</a></li>";
                             }
                             else if ($_SESSION['user']->IsAnonymous()) {
@@ -51,7 +55,7 @@
                                 echo "<li><a href=\"http://localhost/final/control/C_Register.php\"><i class=\"fa fa-user\"></i> Đăng kí</a></li>";
                             }
                             else {
-                                echo "<li><a href=\"#\"><i class=\"fa fa-user\"></i>".$_SESSION['user']->GetInformation()['TEN']."</a></li>";
+                                echo "<li><a href=\"http://localhost/final/control/C_Personal_Info.php\"><i class=\"fa fa-user\"></i>".$_SESSION['user']->GetInformation()['TEN']."</a></li>";
                                 echo "<li><a href=\"http://localhost/final/control/C_Logout.php\"><i class=\"fa fa-user\"></i> Đăng xuất</a></li>";
                             }
                         ?>
@@ -216,10 +220,13 @@
                                         <?php
                                             foreach($productCartList as $product) {
                                                 $id = $product['ID'];
+                                                $image = $prd->SelectProductImageByProductID($id);
+                                                $thumb = $image->fetch_assoc();
+
                                                 $totalPrice = $product['GIA'] * intval($quantity["$id"]);
                                                 $cartSubtotal += $totalPrice;
                                                 echo "<tr class=\"cart_item\"><td class=\"product-remove\" onclick=\"DeleteCartProductCookie($id);location.reload()\"> <a title=\"Remove this item\" class=\"remove\" href=\"#\">×</a> </td>";
-                                                echo "<td class=\"product-thumbnail\"><a href=\"http://localhost/final/control/C_Single-Product.php?id=$id\"><img width=\"145\" height=\"145\" alt=\"poster_1_up\" class=\"shop_thumbnail\" src=\"".$productThumbImage["$id"]['DUONGDAN']."\"></a></td>";
+                                                echo "<td class=\"product-thumbnail\"><a href=\"http://localhost/final/control/C_Single-Product.php?id=$id\"><img width=\"145\" height=\"145\" alt=\"poster_1_up\" class=\"shop_thumbnail\" src=\"../img/".$productThumbImage["$id"]['DUONGDAN']."\"></a></td>";
                                                 echo "<td class=\"product-name\"><a href=\"http://localhost/final/controle/C_Single-Product.php?id=$id\">".$product['TENSANPHAM']."</a></td>";
                                                 echo "<td class=\"product-price\"><span class=\"amount\">".number_format($product['GIA'])." VNĐ</span></td>";
                                                 echo "<td class=\"product-quantity\"><div class=\"quantity buttons_added\"><input id=\"$id\" type=\"number\" size=\"4\" class=\"input-text qty text\" title=\"Qty\" value=\"".$quantity["$id"]."\" min=\"1\" onchange=\"AddCartProductCookie($id,GetQuantity($id))\" step=\"1\"></div></td>";

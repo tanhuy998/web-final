@@ -32,7 +32,7 @@ if (isset($_POST['update_product']))
 
 		//getting the image from the field
 		$product_image = $_FILES['product_image']['name'];
-		$target_path = "../../../images/".$product_image;
+		$target_path = "../../img/".$product_image;
 		$product_image_tmp = $_FILES['product_image']['tmp_name'];
 		move_uploaded_file($product_image_tmp,$target_path);
 		$tag = $_POST['product_tags'];
@@ -83,7 +83,7 @@ if (isset($_POST['insert_post']))
 	$tag_array = explode(',',$tag);
 
 	
-	$dataProduct = array("TENSANPHAM"=>$name,"MOTA"=>$mota,"GIA"=>$gia);
+	$dataProduct = array("TENSANPHAM"=>$name,"MOTA"=>$mota,"GIA"=>$gia,"ACTIVE" => 1);
 	
 	//Insert into PRODUCT beforehand to get ID 
 	$logPro = $model -> InsertProduct($con_link,$dataProduct,'product');

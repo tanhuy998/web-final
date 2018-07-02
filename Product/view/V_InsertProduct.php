@@ -36,11 +36,7 @@ include ('../controller/C_product.php');
                 <div class="col-md-8">
                     <div class="user-menu">
                         <ul>
-                            <li><a href="#"><i class="fa fa-user"></i> Tài khoản </a></li>
-                            <!-- <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li> -->
-                            <li><a href="cart.html"><i class="fa fa-user"></i> Giỏ hàng</a></li>
-                            <li><a href="checkout.html"><i class="fa fa-user"></i> Thanh toán</a></li>
-                            <li><a href="#"><i class="fa fa-user"></i> Đăng nhập</a></li>
+                        
                         </ul>
                     </div>
                 </div>
@@ -129,6 +125,9 @@ include ('../controller/C_product.php');
 	<!-- Insert Product -->
     <body>
 	<form method="post" enctype="multipart/form-data" > 
+        <a href="http://localhost/final/control/C_Index.php">Trở về trang chủ</a>
+        
+        <br><br>
 		<table align="center" width="795" border="2" bgcolor="skyblue">
 			<tr align="center">
 				<td colspan="7"><h2>Thêm sản phẩm mới : </h2></td>

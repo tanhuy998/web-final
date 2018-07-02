@@ -58,20 +58,22 @@ class ProductLogic
 	public function SearchProduct($con_link,$search_query)
 	{
 		/*product.ID,product.TENSANPHAM,product.GIA,product.MOTA,product_tag.TENTAG*/
-		$sql = "select *  from product,product_tag,product_image
+		$res = array();
+		$sql = "SELECT *  from product,product_tag,product_image
 		 
 			where product.ID = product_tag.IDSANPHAM and product_image.IDSANPHAM = product.ID 
-			and product_tag.IDSANPHAM = product_image.IDSANPHAM
-			and product_tag.TENTAG like '%$search_query%' ";
-			
+			and product_tag.TENTAG like '%$search_query%'
+			GROUP BY product.TENSANPHAM
+			order by product.ID ";
 		$exe = $con_link->query($sql);
-		$res = array();
-		while ($fetch = $exe->fetch_object())
+		$index = 0;
+		while ($fetch = $exe -> fetch_object())
 		{
-			$res[] = $fetch;
+			$res[$index++] = $fetch->ID;
 		}
 		return $res;
 	}
+	
 	public function IfTagInSearchQuery($con_link,$search_query)
 	{
 		/*product.ID,product.TENSANPHAM,product.GIA,product.MOTA,product_tag.TENTAG*/
@@ -150,8 +152,7 @@ class ProductLogic
 	//<-----------------------BEGIN RETRIEVE------------------->
 	public function RetrieveProducts($con_link)
 	{
-		$sql = "select * from product,product_image,product_tag where product.ID = product_image.IDSANPHAM and
-		product_tag.IDSANPHAM = product.ID";
+		$sql = "select * from product,product_image where product.ID = product_image.IDSANPHAM";
 		$exe = $con_link->query($sql);
 		$res = array();
 		while ($tmp = $exe ->fetch_object())

@@ -21,12 +21,12 @@ include ('../controller/C_product.php');
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
     <!-- Custom CSS -->
-   <link rel="stylesheet" href="../../../css/owl.carousel.css">
-    <link rel="stylesheet" href="../../../style.css">
-    <link rel="stylesheet" href="../../../css/responsive.css">
-    <link rel="stylesheet" href="../../../dropstyle.css">
+   <link rel="stylesheet" href="http://localhost/final/css/owl.carousel.css">
+    <link rel="stylesheet" href="http://localhost/final/css/style.css">
+    <link rel="stylesheet" href="http://localhost/final/css/responsive.css">
+    <link rel="stylesheet" href="http://localhost/final/css/dropstyle.css">
 
-    <script type="text/javascript" src="ecommerce/js/lib.js"></script>
+    <script type="text/javascript" src="http://localhost/final/js/lib.js"></script>
 
 </head>
 <body>
@@ -36,11 +36,7 @@ include ('../controller/C_product.php');
                 <div class="col-md-8">
                     <div class="user-menu">
                         <ul>
-                            <li><a href="#"><i class="fa fa-user"></i> Tài khoản </a></li>
-                            <!-- <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li> -->
-                            <li><a href="cart.html"><i class="fa fa-user"></i> Giỏ hàng</a></li>
-                            <li><a href="checkout.html"><i class="fa fa-user"></i> Thanh toán</a></li>
-                            <li><a href="#"><i class="fa fa-user"></i> Đăng nhập</a></li>
+                        
                         </ul>
                     </div>
                 </div>
@@ -127,6 +123,9 @@ include ('../controller/C_product.php');
 
 
     <form method="post" enctype="multipart/form-data"> 
+        <a href="http://localhost/final/control/C_Index.php">Trở về trang chủ</a>
+
+        <br> <br>
 		<table align="center" width="795" border="2" bgcolor="#187eae">
 			<tr align="center">
 				<td colspan="7"><h2> Chỉnh sửa sản phẩm </h2></td>

@@ -1,8 +1,9 @@
-<link rel="stylesheet" href="css/owl.carousel.css">
-    <link rel="stylesheet" href="http://localhost:8888/web-test/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    <link rel="stylesheet" href="http://localhost:8888/web-test/dropstyle.css">
-<!DOCTYPE html>
+
+<?php
+    require_once '../libs/LoginStatus.php';
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,7 +29,7 @@
     <link rel="stylesheet" href="http://localhost/final/css/style.css">
     <link rel="stylesheet" href="http://localhost/final/css/responsive.css">
     <link rel="stylesheet" href="http://localhost/final/css/dropstyle.css">
-    <script type="text/javascript" src="../js/lib.js"></script>
+    <script type="text/javascript" src="http://localhost/final/js/lib.js"></script>
 
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -47,7 +48,26 @@
                 <div class="col-md-8">
                     <div class="user-menu">
                         <ul>
-                            
+                        <?php
+                            if ($_SESSION['user']->IsAdmin()) {
+                                echo "<li><a href=\"http://localhost/final/control/C_Personal_Info.php\"><i class=\"fa fa-user\"></i>".$_SESSION['user']->GetInformation()['TEN']."</a></li>";
+                                echo "<li><a href=\"http://localhost/final/view/thanhvien.php\"><i class=\"fa fa-user\"></i> Quản lý thành viên</a></li>";
+                                echo "<li><a href=\"http://localhost/final/Product/view/V_ViewProduct.php\"><i class=\"fa fa-user\"></i> Quản lý Sản phẩm</a></li>";
+                                echo "<li><a href=\"http://localhost/final/Product/view/V_InsertProduct.php\"><i class=\"fa fa-user\"></i> Thêm sản phẩm</a></li>";
+                                echo "<li><a href=\"http://localhost/final/view/order_list.php\"><i class=\"fa fa-user\"></i> Chi tiết hóa đơn</a></li>";
+
+
+                                echo "<li><a href=\"http://localhost/final/control/C_Logout.php\"><i class=\"fa fa-user\"></i> Đăng xuất</a></li>";
+                            }
+                            else if ($_SESSION['user']->IsAnonymous()) {
+                                echo "<li><a href=\"http://localhost/final/control/C_Login.php\"><i class=\"fa fa-user\"></i> Đăng nhập</a></li>";
+                                echo "<li><a href=\"http://localhost/final/control/C_Register.php\"><i class=\"fa fa-user\"></i> Đăng kí</a></li>";
+                            }
+                            else {
+                                echo "<li><a href=\"http://localhost/final/control/C_Personal_Info.php\"><i class=\"fa fa-user\"></i>".$_SESSION['user']->GetInformation()['TEN']."</a></li>";
+                                echo "<li><a href=\"http://localhost/final/control/C_Logout.php\"><i class=\"fa fa-user\"></i> Đăng xuất</a></li>";
+                            }
+                        ?>
                         </ul>
                     </div>
                 </div>
@@ -145,42 +165,68 @@
             </div>
         </div>
     </div>
-    <!-- End mainmenu area -->
+    <div style="width: 100%;height: 400px; background-color: #8cf3e970;overflow-y: scroll; padding-left: 100px; padding-top: 50px; ">
+        <table border="2">
+      <tr>
+        <th>STT</th>
+        <th>Họ Tên</th>
+        <th>Địa Chỉ</th>
+        <th>Email</th>
+        <th>SĐT</th>
+        <th>mã HÓA ĐƠN</th>
+        <th>mã Sản Phẩm</th>
+        <th>Số Lượng</th>
+      </tr>
+   <?php
 
-    <div style="background-color: #00f3ff42;; width: 100%; height: 500px;">
-        <div style="width: 40%; height: 320px; margin:auto;background-color: #00ff7e; border-radius: 20px; padding: 40px; "><h1 style="text-align: center; " >Login</h1>
+   
+     include("../model/connect.php");
+     echo "<h1>Thông Tin hóa Đơn ";
+    
+        /* $sql = "SELECT * FROM order_list,bill where bill.ID = order_list.IDHOADON" ;
+          $ketqua = $connect->query($sql);
+          $row = mysqli_fetch_assoc($ketqua);*/
+           $sql2 = "SELECT * FROM account_information,bill, order_list where bill.IDTAIKHOAN = account_information.IDTAIKHOAN and bill.ID = order_list.IDHOADON";
+          $ketqua2 = $connect->query($sql2);
           
+      
+        /*  $sql2 = "SELECT * FROM account";
+        $ketqua2 = $connect->query($sql2);
+        $row = mysqli_fetch_assoc($ketqua)*/
+        $i = 1;
+        while($row2 = mysqli_fetch_assoc($ketqua2))
+        {
+          echo "<tr>";
+          echo "<td>".$i."</td>";
+          echo "<td>".$row2["TEN"]."</td>";
+          echo "<td>".$row2["DC"]."</td>";
+          echo "<td>".$row2["EMAIL"]."</td>";
+          echo "<td>".$row2["SDT"]."</td>";
+          echo "<td>".$row2["IDTAIKHOAN"]."</td>";
+          echo "<td>".$row2["IDSANPHAM"]."</td>";
+          echo "<td>".$row2["SOLUONG"]."</td></tr>";
             
-            <form enctype="multipart/form-data" action="http://localhost/final/control/C_Login-Process.php" method="post" name="login">
-                <input type="text"name="username" placeholder="Tên Đăng Nhập" style="width: 100%" >
-                <br>
-                <br>
-                <input type="password" name="password" placeholder="Nhập Mật Khẩu" style="width: 100%" >
-                <br>
-                <br>
-
-                 <input type="submit" name="submit" value="Đăng Nhập" class="textbox">
-            </form>
-            <a href="http://localhost/final/control/C_Register.php ">Đăng Ký Mới</a>
-        </div>
+          $i++;
+        }
+     
+    ?>
+    </table>
     </div>
-    <!-- End footer bottom area -->
-
-    <!-- Latest jQuery form server -->
-    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <!-- End mainmenu area -->
+       <script src="https://code.jquery.com/jquery.min.js"></script>
 
     <!-- Bootstrap JS form CDN -->
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
     <!-- jQuery sticky menu -->
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.sticky.js"></script>
+    <script src="http://localhost/final/js/owl.carousel.min.js"></script>
+    <script src="http://localhost/final/js/jquery.sticky.js"></script>
 
     <!-- jQuery easing -->
-    <script src="js/jquery.easing.1.3.min.js"></script>
+    <script src="http://localhost/final/js/jquery.easing.1.3.min.js"></script>
 
     <!-- Main Script -->
-    <script src="js/main.js"></script>
+    <script src="http://localhost/final/js/main.js"></script>
 </body>
 
 </html>

@@ -46,7 +46,7 @@
             
                 $productCartList[] = $row;
             
-                $thumbnail_resource = $prd->SelectProductThumbnailImageByProductID($id);
+                $thumbnail_resource = $prd->SelectProductImageByProductID($id);
                 $productThumbImage["$id"] = $thumbnail_resource->fetch_assoc();
             }
         } 

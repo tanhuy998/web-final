@@ -39,7 +39,7 @@
         public function SelectProductByTagWithPage($tag,int $page) {
             $db = new Database();
 
-            $sql = "SELECT product.ID,product.TENSANPHAM,product.MOTA,product.GIA FROM product,product_tag WHERE product.ID = product_tag.IDSANPHAM AND product_tag.TENTAG = '$tag' ORDER BY product.ID DESC";
+            $sql = "SELECT product.ID,product.TENSANPHAM,product.MOTA,product.GIA FROM product,product_tag WHERE product.ID = product_tag.IDSANPHAM AND product_tag.TENTAG = '$tag' AND product.ACTIVE = '1' ORDER BY product.ID DESC";
 
             $resource = $db->SelectData($sql);
 

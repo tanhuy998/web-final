@@ -350,6 +350,27 @@
             }
         }
 
+        public function UpdateInformation(array $_new_arrInfor): bool {
+            $uID = convert_uudecode($this->id);
+
+            foreach ($this->information as $field => $oldValue) {
+                if (isset($_new_arrInfor["$field"])) {
+                    $newValue = $_new_arrInfor["$field"];
+
+                    $db = new Database();
+
+                    $sql = "UPDATE account_information SET $field = '$newValue' WHERE account_information.IDTAIKHOAN = '$uID' ";
+
+                    if (!$db->InsertData($sql)) {
+                        return false;
+                    }
+                }
+            }
+
+            unset($this->information);
+            return true;
+        }
+
         // mm
     }
 ?>
