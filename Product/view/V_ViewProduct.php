@@ -76,33 +76,24 @@
                         </button>
                 </div>
                 <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="index.html">TRANG CHỦ</a></li>
-                        <li>
+                <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">TRANG CHỦ</a></li>
+                        <li >
                             <div class="dropdown">
                                 <button class="dropbtn">SẢN PHẨM</button>
                                 <div class="dropdown-content">
-                                    <a href="shop-ao.html">ÁO</a>
-                                    <a href="shop-quan.html">QUẦN</a>
-                                    <a href="shop-giay.html">GIÀY DÉP</a>
+                                  <a href="http://localhost/final/control/C_Product.php?category=ao&page=1">ÁO</a>
+                                  <a href="http://localhost/final/control/C_Product.php?category=quan&page=1">QUẦN</a>
+                                  <a href="http://localhost/final/control/C_Product.php?category=giay&page=1">GIÀY DÉP</a>
                                 </div>
                             </div>
                         </li>
-                        <li><a href="#">Sản phẩm đơn lẻ</a></li>
-                        <li><a href="cart.html">Giỏ hàng</a></li>
-                        <li><a href="checkout.html">Thanh toán</a></li>
+                        <!--<li><a href="#">Single product</a></li> -->
+                        <li><a href="http://localhost/final/control/C_Cart.php">GIỎ HÀNG</a></li>
+                        <li><a href="http://localhost/final/control/C_Checkout.php">THANH TOÁN</a></li>
                         <!-- <li><a href="#">Category</a></li> -->
                         <!-- <li><a href="#">Others</a></li> -->
-                        <li>
-                            <div class="dropdown">
-                                <button class="dropbtn">LIÊN HỆ</button>
-                                <div class="dropdown-content">
-                                    <a href="#">Facebook</a>
-                                    <a href="#">Instagram</a>
-                                    <a href="#">Địa chỉ shop</a>
-                                </div>
-                            </div>
-                        </li>
+                        <li><a href="#">LIÊN HỆ</a></li>
                     </ul>
                 </div>
             </div>
@@ -131,11 +122,13 @@
         {
         ?>
             <tr align="center">
+                <?php $id = $eachPro->IDSANPHAM ?>
+                <td><?php echo $eachPro->ID?></td> 
                 <td><?php echo $eachPro->TENSANPHAM;?></td>
                 <td><img src="<?php echo "../../img/".$eachPro->DUONGDAN; ?>" width="180" height="180"/></td>
                 <td><?php echo $eachPro->GIA;?></td>
-                <td><a href="V_UpdateProduct.php "> Chỉnh sửa </a></td>
-                <td><a href="../controller/C_product.php?delete_pro=<?php echo $pro_id; ?>"> ngừng kinh doanh </a></td>
+                <td><a href="V_UpdateProduct.php?Id_To_Update = <?php echo $id; ?>"> Chỉnh sửa </a></td>
+                <td><a href="../controller/C_product.php?delete_product=<?php echo $eachPro->ID; ?>"> <?php if ($eachPro->ACTIVE == 1) {echo 'Cho ngừng kinh doanh';} else {echo 'Kinh doanh lại';}?> </a></td>
     
             </tr>
         <?php } ?>  

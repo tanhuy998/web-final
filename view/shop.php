@@ -126,8 +126,8 @@
                 </div> 
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="http://localhost/final/control/C_Index.php">TRANG CHỦ</a></li>
-                        <li class="active" >
+                        <li class="active"><a href="#">TRANG CHỦ</a></li>
+                        <li >
                             <div class="dropdown">
                                 <button class="dropbtn">SẢN PHẨM</button>
                                 <div class="dropdown-content">
@@ -142,7 +142,7 @@
                         <li><a href="http://localhost/final/control/C_Checkout.php">THANH TOÁN</a></li>
                         <!-- <li><a href="#">Category</a></li> -->
                         <!-- <li><a href="#">Others</a></li> -->
-                        <li><a href="#">LIÊN HỆ</a></li>
+                        <li><a href="http://localhost/final/view/lienhe.php">LIÊN HỆ</a></li>
                     </ul>
                 </div>  
             </div>
@@ -183,9 +183,9 @@
                         echo "<div class=\"col-md-3 col-sm-6\">";
                         echo "<div class=\"single-shop-product\">";
                         echo    "<div class=\"product-upper\">";
-                        echo        "<a href=\"http://localhost/final/control/C_Single-product.php?id=".$row['ID']."&category=".$type."\"><img src=\"".'../img/'.$thumb['DUONGDAN']."\" alt=\"img\"></a>";
+                        echo        "<a href=\"http://localhost/final/control/C_Single-product.php?id=".$row['ID']."&category=\"><img src=\"".'../img/'.$thumb['DUONGDAN']."\" alt=\"img\"></a>";
                         echo   "</div>";
-                        echo    "<h2><a href=\"http://localhost/final/control/C_Single-product.php?id=".$row['ID']."&category=".$type."\">".$row['TENSANPHAM']."</a></h2>";
+                        echo    "<h2><a href=\"http://localhost/final/control/C_Single-product.php?id=".$row['ID']."&category=\">".$row['TENSANPHAM']."</a></h2>";
                         echo    "<div class=\"product-carousel-price\">";
                         echo        "<ins>".$row['GIA']."</ins>";
                         echo     "</div>";

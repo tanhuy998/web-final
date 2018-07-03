@@ -137,7 +137,7 @@
                         <li><a href="http://localhost/final/control/C_Checkout.php">THANH TOÁN</a></li>
                         <!-- <li><a href="#">Category</a></li> -->
                         <!-- <li><a href="#">Others</a></li> -->
-                        <li><a href="#">LIÊN HỆ</a></li>
+                        <li><a href="http://localhost/final/view/lienhe.php">LIÊN HỆ</a></li>
                     </ul>
                 </div>  
             </div>
@@ -163,10 +163,10 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="single-sidebar">
-                        <h2 class="sidebar-title">Search Products</h2>
-                        <form action="#">
-                            <input type="text" placeholder="Search products...">
-                            <input type="submit" value="Search">
+                        <h2 class="sidebar-title">Tìm kiếm sản phẩm</h2>
+                        <form action="http://localhost/final/control/C_Search.php" method="get">
+                            <input type="text" name="search-str" placeholder="Search products...">
+                            <input type="submit" value="Search" name="search">
                         </form>
                     </div>
                     
@@ -264,7 +264,7 @@
 
 
                             <div class="cross-sells">
-                                <h2></h2>
+                                <!-- <h2></h2>
                                 <ul class="products">
                                     <li class="product">
                                         <a href="single-product.html">
@@ -285,7 +285,7 @@
 
                                         <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="22" rel="nofollow" href="single-product.html">Select options</a>
                                     </li>
-                                </ul>
+                                </ul> -->
                             </div>
 
 

@@ -40,7 +40,7 @@
     $result = $prd->SelectProductByTagWithPage($type,intval($currentPage));
     //$result = $prd->SelectProductByTag($type);
     $product_count = $prd->ProductCountByTag($type);
-
+    
     //$temp1 = intval($result->num_rows / 8);
     //$temp2 = ($result->num_rows % 8) == 0? 0 : 1;
     $temp1 = intval($product_count / 8);

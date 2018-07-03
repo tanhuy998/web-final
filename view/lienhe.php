@@ -1,9 +1,3 @@
-
-<?php
-    require_once '../libs/LoginStatus.php';
-    session_start();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,7 +20,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="http://localhost/final/css/owl.carousel.css">
-    <link rel="stylesheet" href="http://localhost/final/css/style.css">
+    <link rel="stylesheet" href="http://localhost/final/style.css">
     <link rel="stylesheet" href="http://localhost/final/css/responsive.css">
     <link rel="stylesheet" href="http://localhost/final/css/dropstyle.css">
     <script type="text/javascript" src="http://localhost/final/js/lib.js"></script>
@@ -48,26 +42,11 @@
                 <div class="col-md-8">
                     <div class="user-menu">
                         <ul>
-                        <?php
-                            if ($_SESSION['user']->IsAdmin()) {
-                                echo "<li><a href=\"http://localhost/final/control/C_Personal_Info.php\"><i class=\"fa fa-user\"></i>".$_SESSION['user']->GetInformation()['TEN']."</a></li>";
-                                echo "<li><a href=\"http://localhost/final/view/thanhvien.php\"><i class=\"fa fa-user\"></i> Quản lý thành viên</a></li>";
-                                echo "<li><a href=\"http://localhost/final/Product/view/V_ViewProduct.php\"><i class=\"fa fa-user\"></i> Quản lý Sản phẩm</a></li>";
-                                echo "<li><a href=\"http://localhost/final/Product/view/V_InsertProduct.php\"><i class=\"fa fa-user\"></i> Thêm sản phẩm</a></li>";
-                                echo "<li><a href=\"http://localhost/final/view/order_list.php\"><i class=\"fa fa-user\"></i> Chi tiết hóa đơn</a></li>";
-
-
-                                echo "<li><a href=\"http://localhost/final/control/C_Logout.php\"><i class=\"fa fa-user\"></i> Đăng xuất</a></li>";
-                            }
-                            else if ($_SESSION['user']->IsAnonymous()) {
-                                echo "<li><a href=\"http://localhost/final/control/C_Login.php\"><i class=\"fa fa-user\"></i> Đăng nhập</a></li>";
-                                echo "<li><a href=\"http://localhost/final/control/C_Register.php\"><i class=\"fa fa-user\"></i> Đăng kí</a></li>";
-                            }
-                            else {
-                                echo "<li><a href=\"http://localhost/final/control/C_Personal_Info.php\"><i class=\"fa fa-user\"></i>".$_SESSION['user']->GetInformation()['TEN']."</a></li>";
-                                echo "<li><a href=\"http://localhost/final/control/C_Logout.php\"><i class=\"fa fa-user\"></i> Đăng xuất</a></li>";
-                            }
-                        ?>
+                            <li><a href="#"><i class="fa fa-user"></i> Tài khoản </a></li>
+                            <!-- <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li> -->
+                            <li><a href="cart.html"><i class="fa fa-user"></i> Giỏ hàng</a></li>
+                            <li><a href="checkout.html"><i class="fa fa-user"></i> Thanh toán</a></li>
+                            <li><a href="#"><i class="fa fa-user"></i> Đăng nhập</a></li>
                         </ul>
                     </div>
                 </div>
@@ -156,68 +135,22 @@
             </div>
         </div>
     </div>
-    <div style="width: 100%;height: 400px; background-color: #8cf3e970;overflow-y: scroll; padding-left: 100px; padding-top: 50px; ">
-        <table border="2">
-      <tr>
-        <th>STT</th>
-        <th>Họ Tên</th>
-        <th>Địa Chỉ</th>
-        <th>Email</th>
-        <th>SĐT</th>
-        <th>mã HÓA ĐƠN</th>
-        <th>mã Sản Phẩm</th>
-        <th>Số Lượng</th>
-      </tr>
-   <?php
-
-   
-     include("../model/connect.php");
-     echo "<h1>Thông Tin hóa Đơn ";
-    
-        /* $sql = "SELECT * FROM order_list,bill where bill.ID = order_list.IDHOADON" ;
-          $ketqua = $connect->query($sql);
-          $row = mysqli_fetch_assoc($ketqua);*/
-           $sql2 = "SELECT * FROM account_information,bill, order_list where bill.IDTAIKHOAN = account_information.IDTAIKHOAN and bill.ID = order_list.IDHOADON";
-          $ketqua2 = $connect->query($sql2);
-          
-      
-        /*  $sql2 = "SELECT * FROM account";
-        $ketqua2 = $connect->query($sql2);
-        $row = mysqli_fetch_assoc($ketqua)*/
-        $i = 1;
-        while($row2 = mysqli_fetch_assoc($ketqua2))
-        {
-          echo "<tr>";
-          echo "<td>".$i."</td>";
-          echo "<td>".$row2["TEN"]."</td>";
-          echo "<td>".$row2["DC"]."</td>";
-          echo "<td>".$row2["EMAIL"]."</td>";
-          echo "<td>".$row2["SDT"]."</td>";
-          echo "<td>".$row2["IDTAIKHOAN"]."</td>";
-          echo "<td>".$row2["IDSANPHAM"]."</td>";
-          echo "<td>".$row2["SOLUONG"]."</td></tr>";
-            
-          $i++;
-        }
-     
-    ?>
-    </table>
-    </div>
     <!-- End mainmenu area -->
-       <script src="https://code.jquery.com/jquery.min.js"></script>
+    <div style="width: 100%; height: 500px; background-color:#00d0ff4d">
+        <img src="img/logo.png" alt="#" style="margin-left: 500px; margin-top: 50px;">
+        <div style="width: 70%; height: 370px; margin:auto; background-color: #00f3ff47; padding: 30px;">
+            <h4>Nơi bạn tìm thấy phong cách, cá tính của bạn!!</h4>
+            <h2>Địa chỉ :</h2>
+            <h5>89, Dương Đình Hội, Q9, TPHCM</h5>
+            <h2>Tel:</h2>
+            <h5> 01664601255</h5>
+            <h2>Liên hệ Nhân Sự:</h2>
+            <h6> Mrcuong(Giám đốc điều hành): 09888888888</h6>
+            <h6> MrHuy(Quản lý sản phẩm): 097777777777</h6>
+            <h6> MrAn(Kế toán): 09666666666</h6>
+            <h6> MrTrung(Nhân sự): 09555555555</h6>
+        </div>
+    </div>
 
-    <!-- Bootstrap JS form CDN -->
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-    <!-- jQuery sticky menu -->
-    <script src="http://localhost/final/js/owl.carousel.min.js"></script>
-    <script src="http://localhost/final/js/jquery.sticky.js"></script>
-
-    <!-- jQuery easing -->
-    <script src="http://localhost/final/js/jquery.easing.1.3.min.js"></script>
-
-    <!-- Main Script -->
-    <script src="http://localhost/final/js/main.js"></script>
-</body>
-
-</html>
+   </body>
+   </html>

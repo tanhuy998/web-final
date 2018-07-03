@@ -121,8 +121,8 @@
                 </div> 
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="http://localhost/final/control/C_Index.php">TRANG CHỦ</a></li>
-                        <li>
+                        <li class="active"><a href="#">TRANG CHỦ</a></li>
+                        <li >
                             <div class="dropdown">
                                 <button class="dropbtn">SẢN PHẨM</button>
                                 <div class="dropdown-content">
@@ -132,12 +132,12 @@
                                 </div>
                             </div>
                         </li>
-                        <li class="active"><a href="#">SẢN PHẨM ĐƠN LẺ</a></li>
+                        <!--<li><a href="#">Single product</a></li> -->
                         <li><a href="http://localhost/final/control/C_Cart.php">GIỎ HÀNG</a></li>
                         <li><a href="http://localhost/final/control/C_Checkout.php">THANH TOÁN</a></li>
                         <!-- <li><a href="#">Category</a></li> -->
                         <!-- <li><a href="#">Others</a></li> -->
-                        <li><a href="#">LIÊN HỆ</a></li>
+                        <li><a href="http://localhost/final/view/lienhe.php">LIÊN HỆ</a></li>
                     </ul>
                 </div>  
             </div>
@@ -164,7 +164,7 @@
                 <div class="col-md-4">
                     <div class="single-sidebar">
                         <h2 class="sidebar-title">Tìm kiếm</h2>
-                        <form action="http://localhost/control/C_Search.php">
+                        <form action="http://localhost/final/control/C_Search.php" method="get">
                             <input type="text" name="search-str" placeholder="Search products...">
                             <input type="submit" value="Search" name="search">
                         </form>

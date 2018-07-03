@@ -144,7 +144,7 @@
                         <li><a href="http://localhost/final/control/C_Checkout.php">THANH TOÁN</a></li>
                         <!-- <li><a href="#">Category</a></li> -->
                         <!-- <li><a href="#">Others</a></li> -->
-                        <li><a href="#">LIÊN HỆ</a></li>
+                        <li><a href="http://localhost/final/view/lienhe.php">LIÊN HỆ</a></li>
                     </ul>
                 </div>
             </div>

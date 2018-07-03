@@ -58,19 +58,29 @@ class ProductLogic
 	public function SearchProduct($con_link,$search_query)
 	{
 		/*product.ID,product.TENSANPHAM,product.GIA,product.MOTA,product_tag.TENTAG*/
+		$arr = explode(' ',$search_query);
+
 		$res = array();
-		$sql = "SELECT *  from product,product_tag,product_image
+
+		foreach ($arr as $tag) {
+			$sql = "SELECT *  from product,product_tag,product_image
 		 
 			where product.ID = product_tag.IDSANPHAM and product_image.IDSANPHAM = product.ID 
-			and product_tag.TENTAG like '%$search_query%'
+			and product_tag.TENTAG like '%$tag%'
 			GROUP BY product.TENSANPHAM
 			order by product.ID ";
-		$exe = $con_link->query($sql);
-		$index = 0;
-		while ($fetch = $exe -> fetch_object())
-		{
-			$res[$index++] = $fetch->ID;
+			$exe = $con_link->query($sql);
+			$index = 0;
+			while ($fetch = $exe -> fetch_object())
+			{
+				$id = $fetch->ID;
+				if (!isset($res["$id"])) {
+					$res["$id"] = $id;
+				}
+			}
+
 		}
+		
 		return $res;
 	}
 	
@@ -109,7 +119,7 @@ class ProductLogic
 		return false;
 	}
 
-	public function UpdateProduct($con_link,$data,$table,$condition)
+	public function UpdateProductWithoutTags($con_link,$data,$table,$condition)
 	{
 		//Apropriate column names;
 		if($table === 'product')	
@@ -134,20 +144,37 @@ class ProductLogic
 
 	
 	//<-----------------------BEGIN DELETE------------------->
-	public function DeleteProduct($con_link,$table,$ID)
+	public function DeleteProduct($con_link,$ID)
 	{
 		//Apropriate column names;
-		if($table === 'product')	
-			$specialTable = 'ID';
-		else
-			$specialTable = 'IDSANPHAM';
+		// if($table === 'product')	
+		// 	$specialTable = 'ID';
+		// else
+		// 	$specialTable = 'IDSANPHAM';
 		
-		$delete = "delete from $table where here $table.$specialTable = $condition";
-		$exe = $con_link->query($delete);
-		return $exe;
+		// $delete = "delete from $table where here $table.$specialTable = $condition";
+		// $exe = $con_link->query($delete);
+		// return $exe;
+
+		/* Shoft delete */
+
+		$sql = "UPDATE product SET ACTIVE = '0' WHERE product.ID = '$ID'";
+
+		if ($con_link->query($sql)) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	//<----------------------------END DELETE ----------------->
 
+	public function DeleteTags($con_link,$condition)
+	{
+		$deleteTag = "DELETE FROM product_tag WHERE product_tag.IDSANPHAM = $condition";
+		$exeDel = $con_link->query($deleteTag);
+		return $exeDel;
+	}
 
 	//<-----------------------BEGIN RETRIEVE------------------->
 	public function RetrieveProducts($con_link)

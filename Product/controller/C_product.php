@@ -19,11 +19,14 @@ if (isset($_REQUEST['Search']))
 
 //<-----BEGIN UPDATE------->
 
+
+include_once ('../model/M_product.php');
+$model = new ProductLogic;
 if (isset($_POST['update_product']))
 {
 	$updatedID = $_POST['product_id'];
 	$result = $model->CheckID($con_link,$updatedID);
-	
+
 	if ($result)
 	{
 		$name = $_POST['product_name'];
@@ -35,17 +38,25 @@ if (isset($_POST['update_product']))
 		$target_path = "../../img/".$product_image;
 		$product_image_tmp = $_FILES['product_image']['tmp_name'];
 		move_uploaded_file($product_image_tmp,$target_path);
-		$tag = $_POST['product_tags'];
 
+		//Split tags into tag
+		$tag = $_POST['product_tags'];
+		$tag_array = explode(',',$tag);
+	
 		//Array preparation 
 		$dataProduct = array("TENSANPHAM"=>$name,"MOTA"=>$mota,"GIA"=>$gia);
 		$dataWithImg = array("IDSANPHAM"=>$updatedID,"DUONGDAN"=>$product_image);
-		$dataWithTag = array("IDSANPHAM"=>$updatedID,"TENTAG"=>$tag);
-
-		//Update product
-		$updatePro = $model -> UpdateProduct($con_link,$dataProduct,'product',$updatedID);
-		$updateImg = $model -> UpdateProduct($con_link,$dataWithImg,'product_image',$updatedID);
-		$updateTag = $model -> UpdateProduct($con_link,$dataWithTag,'product_tag',$updatedID);
+		
+		//Update product-tag
+		
+		$delTagsFirst = $model->DeleteTags($con_link,$updatedID);
+		foreach($tag_array as $tag) {
+			$dataWithTag = array("IDSANPHAM"=>$updatedID,"TENTAG"=>$tag);
+			$updateTag = $model ->InsertProduct($con_link,$dataWithTag,'product_tag');
+		}
+		//Update product and product_image
+		$updatePro = $model -> UpdateProductWithoutTags($con_link,$dataProduct,'product',$updatedID);
+		$updateImg = $model -> UpdateProductWithoutTags($con_link,$dataWithImg,'product_image',$updatedID);
 	
 		if ($updatePro && $updateImg && $updateTag)
 		{
@@ -61,6 +72,7 @@ if (isset($_POST['update_product']))
 		echo "<script>alert('Sản phẩm không tồn tại ! Xin mời kiểm tra lại')</script>";
 	}
 }
+
 //<------------END UPDATE------>
 
 				/* NEXT */	
@@ -118,12 +130,20 @@ if (isset($_POST['insert_post']))
 
 //FSDA
 //<-----------------------BEGIN DELETE------------------->
-if (isset($_POST['delete_product']))
+if (isset($_GET['delete_product']))
 {
-	$IdToDel = $_GET['Id_ToDel'];
-	$delFromPro = $model ->DeleteProduct($con_link,'product',$IdToDel);
-	$delFromImg = $model ->DeleteProduct($con_link,'product_image',$IdToDel);
-	$defFromTag = $model ->DeleteProduct($con_link,'product_tag',$IdToDel);
+	$IdToDel = $_GET['delete_product'];
+	echo $IdToDel;
+	
+	$back = $_SERVER['HTTP_REFERER'];
+	if ($model ->DeleteProduct($con_link,$IdToDel)) {
+		echo "Đã cho sản phẩm ngừng kinh doanh  <a href=\"$back\"> Trở về</a>";
+	}
+	else {
+		echo "Đã xảy ra lỗi trong quá trình thực hiện  <a href=\"$back\"> Trở về</a>";
+	}
+	// $delFromImg = $model ->DeleteProduct($con_link,'product_image',$IdToDel);
+	// $defFromTag = $model ->DeleteProduct($con_link,'product_tag',$IdToDel);
 }
 //<------END DELETE----->
 
